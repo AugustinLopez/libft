@@ -46,23 +46,36 @@ Symbol | Meaning
 - :black_large_square::white_circle:	void	ft_lstdelone(t_list \*\*alst, void (\*del)(void \*, size_t));
 - :black_large_square::white_circle:	void	ft_lstdel(t_list \*\*alst, void (\*del)(void \*, size_t));
 - :black_large_square::white_circle:	void	ft_lstadd(t_list \*\*alst, t_list \*new);
+- :black_large_square::white_circle:	void	ft_lstmap(t_list \*lst, t_list \*(\*f)(t_list \* elem));
+- :black_large_square::white_circle:	void	ft_lstiter(t_list \*lst, void (\*f)(t_list \*elem));
 - :black_large_square::black_circle:	void	ft_lstinsert(t_list \*\*alst, t_list \*new);
 - :black_large_square::black_circle:	void	ft_lstappend(t_list \*\*alst, t_list \*new);
 - :black_large_square::black_circle:	void	ft_lstfree(void \*content, size_t content_size);
 - :black_large_square::black_circle:	size_t	ft_lstsize(t_list \*lst);
 
 ### Is 'A' Functions
-- :black_large_square::black_circle:	 	int		ft_iswhitespace(char \*s, int ignore_line_feed);
+- :white_large_square::white_circle:	int		ft_isalpha(int c);
+- :white_large_square::white_circle:	int		ft_isdigit(int c);
+- :white_large_square::white_circle:	int		ft_isalnum(int c);
+- :white_large_square::white_circle:	int		ft_isascii(int c);
+- :white_large_square::white_circle:	int		ft_isprint(int c);
+- :black_large_square::black_circle:	int		ft_iswhitespace(char \*s, int ignore_line_feed);
 
 ### 'A' To 'B' Functions
 - :white_large_square::white_circle:	int		ft_atoi(const char \*src);
+- :white_large_square::white_circle:	int		ft_toupper(int c);
+- :white_large_square::white_circle:	int		ft_tolower(int c);
 - :black_large_square::white_circle:	char	\*ft_itoa(int n);
 - :black_large_square::black_circle:	size_t	ft_atozu(const char \*src);
 
 ### String Search Functions
 - :white_large_square::white_circle:	char	\*ft_strchr(const char \*s, int c);
+- :white_large_square::white_circle:	int		ft_strcmp(const char \*s1, const char \*s2);
 - :white_large_square::white_circle:	int		ft_strncmp(const char \*s1, const char \*s2, size_t n);
 - :white_large_square::white_circle:	char	\*ft_strstr(const char \*haystack, const char \*needle);
+- :white_large_square::white_circle:	char	\*ft_strnstr(const char \*haystack, const char \*needle, size_t len);
+- :black_large_square::white_circle:	int		ft_strequ(char const \*s1, char const \*s2);
+- :black_large_square::white_circle:	int		ft_strnequ(char const \*s1, char const \*s2);
 - :black_large_square::black_circle:	char	\*ft_strastr(const char \*s1, const char \*s2);
 - :black_large_square::black_circle:	size_t	ft_strastri(const char \*s1, const char \*s2);
 - :black_large_square::black_circle:	size_t	ft_strchri(const char \*s, int c);
@@ -74,14 +87,20 @@ Symbol | Meaning
 ### String Modification Functions
 - :white_large_square::white_circle:	char	\*ft_strcat(char \*s1, const char \*s2);
 - :white_large_square::white_circle:	char	\*ft_strncat(char \*s1, const char \*s2, size_t n);
+- :white_large_square::white_circle:	char	\*ft_strlcat(char \*s1, const char \*s2, size_t n);
 - :white_large_square::white_circle:	char	\*ft_strdup(const char \*s1);
 - :white_large_square::white_circle:	char	\*ft_strcpy(char \*dst, const char \*src);
+- :white_large_square::white_circle:	char	\*ft_strncpy(char \*dst, const char \*src, size_t len);
 - :black_large_square::white_circle:	void	ft_strclr(char \*s);
 - :black_large_square::white_circle:	void	ft_strdel(char \*\*as);
 - :black_large_square::white_circle:	char	\*ft_strnew(size_t size);
 - :black_large_square::white_circle:	char	\*ft_strsub(char const \*s, unsigned int start, size_t len);
 - :black_large_square::white_circle:	char	\*ft_strjoin(char const \*s1, char const \*s2);
 - :black_large_square::white_circle:	char	\*ft_strtrim(char const \*s);
+- :black_large_square::white_circle:	void	ft_strtiter(char \*s, void (\*f)(char \*));
+- :black_large_square::white_circle:	void	ft_striteri(char \*s, void (\*f)(unsigned int, char \*));
+- :black_large_square::white_circle:	char	\*ft_strmap(char const \*s, char (\*f)(char));
+- :black_large_square::white_circle:	char	\*ft_strmapi(char const \*s, char (\*f)(unsigned int, char));
 - :black_large_square::black_circle:	char	\*ft_pathjoin(char const \*s1, char const \*s2);
 - :black_large_square::black_circle:	void	ft_free_sarray(char \*\*\*s);
 

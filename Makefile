@@ -6,7 +6,7 @@
 #    By: aulopez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/03/18 15:30:14 by aulopez          ###   ########.fr        #
+#    Updated: 2019/03/20 12:31:44 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME=libft.a
 
 # --- 1.Source/Header ----------------------------------------------------------
 
-___PUT=	putchar \
+_PUT=	putchar \
 		putchar_fd \
 		putendl \
 		putendl_fd \
@@ -22,27 +22,43 @@ ___PUT=	putchar \
 		putnbr_fd \
 		putstr \
 		putstr_fd
-___MEM=	memcmp \
-		memdel \
+_MEM=	memdel \
 		bzero \
 		memset \
 		memcpy \
 		memccpy \
 		memmove \
 		memchr \
-		memalloc
-__LIST=	lstnew \
+		memalloc \
+		memcmp
+_LIST=	lstnew \
 		lstdelone \
 		lstdel \
 		lstadd \
+		lstmap \
+		lstiter \
 		lstinsert \
 		lstappend \
 		lstfree \
 		lstsize
-____TO=	atoi \
+_IS=	isalpha \
+		isdigit \
+		isalnum \
+		isascii \
+		isprint \
+		iswhitespace
+_TO=	atoi \
+		toupper \
+		tolower \
 		itoa \
 		atozu
 STRCHR=	strchr \
+		strcmp \
+		strncmp \
+		strstr \
+		strnstr \
+		strequ \
+		strnequ \
 		strastr \
 		strastri \
 		strchri \
@@ -50,29 +66,32 @@ STRCHR=	strchr \
 		wstrlen \
 		wcharlen \
 		strcmp \
-		strncmp \
 		strlcmp \
 		strnchri \
-		strstr \
 		strrstr \
 		strrchr
 STRSET=	strcat \
 		strncat \
+		strlcat \
 		strclr \
 		strcpy \
+		strncpy \
 		strdel \
 		strdup \
 		strjoin \
 		strnew \
 		strsub \
-		strsplit \
-		strssplit \
+		strtrim \
+		striter \
+		striteri \
+		strmap \
+		strmapi \
 		pathjoin \
-		free_sarray \
-		strtrim
-_OTHER=	gnl \
-		iswhitespace
-_LIBFT=	$(___PUT) $(___MEM) $(__LIST) $(____TO) $(STRCHR) $(STRSET) $(_OTHER)
+		free_sarray
+_PARSE=	strsplit \
+		strssplit \
+		gnl
+_LIBFT=	$(_PUT) $(_MEM) $(_LIST) $(_IS) $(_TO) $(STRCHR) $(STRSET) $(_OTHER)
 
 PRINTF=	ft_printf \
 		pf_buffer \
@@ -83,7 +102,7 @@ PRINTF=	ft_printf \
 		pf_string \
 		pf_double \
 		pf_string_2
-__FTOA=	f_bigint \
+_FTOA=	f_bigint \
 		f_create_unit \
 		f_operand \
 		f_create_stack \
@@ -107,7 +126,7 @@ PATH_FTOA=./srcs/printf/ftoa/
 
 OBJLIBFT=$(_LIBFT:%=$(PATH_OBJ)ft_%.o)
 OBJPRINTF=$(PRINTF:%=$(PATH_OBJ)%.o)
-OBJFTOA=$(__FTOA:%=$(PATH_OBJ)%.o)
+OBJFTOA=$(_FTOA:%=$(PATH_OBJ)%.o)
 OBJ=$(OBJLIBFT) $(OBJPRINTF) $(OBJFTOA)
 
 # --- 4.Variables --------------------------------------------------------------
@@ -134,10 +153,10 @@ STRIKE=\033[9m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\r$(YELLOW)Object file creation:     $(GREEN)$(BOLD)Done.$(EOC)"
-	@echo -n "\r$(YELLOW)Compiling library: $(EOC)       "
+	@printf "\r$(YELLOW)Object file creation:     $(GREEN)$(BOLD)Done.$(EOC)\n"
+	@printf "\r$(YELLOW)Compiling library: $(EOC)       "
 	@ar rcs $(NAME) $(OBJ)
-	@echo "$(GREEN)$(BOLD)Done.$(EOC)"
+	@printf "$(GREEN)$(BOLD)Done.$(EOC)\n"
 
 $(PATH_OBJ)%.o:$(PATH_LIB)%.c $(INCLUDES)
 	@printf "\r$(PURPLE)$(ITALIC)Creating %-22s$(EOC)" "$@$ "
@@ -152,14 +171,14 @@ $(PATH_OBJ)%.o:$(PATH_FTOA)%.c $(INCLUDES)
 	@$(CC) $< -o $@
 
 clean:
-	@echo -n "$(YELLOW)Deleting object files: $(EOC)   "
+	@printf "$(YELLOW)Deleting object files: $(EOC)   "
 	@rm -f $(OBJ)
-	@echo "$(GREEN)$(BOLD)Done.$(EOC)"
+	@printf "$(GREEN)$(BOLD)Done.$(EOC)\n"
 
 fclean: clean
-	@echo -n "$(YELLOW)Removing library: $(EOC)        "
+	@printf "$(YELLOW)Removing library: $(EOC)        "
 	@rm -f $(NAME)
-	@echo "$(GREEN)$(BOLD)Done.$(EOC)"
+	@printf "$(GREEN)$(BOLD)Done.$(EOC)\n"
 
 re: fclean all
 
@@ -172,5 +191,5 @@ re: fclean all
 #R_MATH=	pow sqrt rand
 #R___IS=	isalnum isalpha isascii isdigit isprint
 #R___TO=	tolower toupper
-#RTRCHR=	strstr strnstr strrstr strrchr strcount strequ strnequ
-#RTRSET=	strlcat strncpy striter striteri strmap strmapi strtrim
+#RTRCHR=	strnstr strcount strequ strnequ
+#RTRSET=	strlcat strncpy striter striteri strmap strmapi

@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 08:40:39 by aulopez           #+#    #+#             */
-/*   Updated: 2019/03/18 15:21:29 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/03/20 12:32:08 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ typedef struct		s_list
 # define FT_STRIKE		"\033[9m"
 
 /*
-** --- Put Functions -----------------------------------------------------------
-** To write.
+** --- Print/Put Functions -----------------------------------------------------
 */
 
 void				ft_putchar(char c);
@@ -54,15 +53,13 @@ void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 int					ft_printf(const char *format, ...);
 int					ft_dprintf(int fd, const char *format, ...);
-int					ft_nprintf(const char *format, ...);
 char				*ft_sprintf(const char *format, ...);
+int					ft_nprintf(const char *format, ...);
 
 /*
-** --- Mem Functions -----------------------------------------------------------
-** To use raw memory area
+** --- Raw Memory Functions ----------------------------------------------------
 */
 
-int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				ft_memdel(void **ap);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
@@ -71,35 +68,32 @@ void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memalloc(size_t size);
+int					ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /*
-** --- List Functions ----------------------------------------------------------
-** To deal with a single-link list.
-**
-**
-** t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-** void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+** --- Singly Linked List Functions --------------------------------------------
 */
+
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
+t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstinsert(t_list **alst, t_list *new);
 void				ft_lstappend(t_list **alst, t_list *new);
 void				ft_lstfree(void *content, size_t content_size);
 size_t				ft_lstsize(t_list *lst);
 
 /*
-** --- Is Functions ------------------------------------------------------------
-** boolean return.
-**
-**
-** int					ft_isalpha(int c);
-** int					ft_isdigit(int c);
-** int					ft_isalnum(int c);
-** int					ft_isascii(int c);
-** int					ft_isprint(int c);
+** --- Is  'A' Functions -------------------------------------------------------
 */
+
+int					ft_isalpha(int c);
+int					ft_isdigit(int c);
+int					ft_isalnum(int c);
+int					ft_isascii(int c);
+int					ft_isprint(int c);
 int					ft_iswhitespace(char *s, int ignore_line_feed);
 
 /*
@@ -112,29 +106,26 @@ int					ft_iswhitespace(char *s, int ignore_line_feed);
 */
 
 /*
-** --- To Functions ------------------------------------------------------------
-** Conversion functions.
-**
-**
-** int					ft_toupper(int c);
-** int					ft_tolower(int c);
+** --- 'A' To 'B' Functions ----------------------------------------------------
 */
+
 int					ft_atoi(const char *src);
+int					ft_toupper(int c);
+int					ft_tolower(int c);
 char				*ft_itoa(int n);
 size_t				ft_atozu(const char *src);
 
 /*
 ** --- String Search Functions -------------------------------------------------
-** To find information with strings.
-**
-**
-** char				*ft_strnstr(const char *haystack,
-** 						const char *needle, size_t len);
 ** size_t			ft_strcount(const char *s, int c);
-** int				ft_strequ(char const *s1, char const *s2);
-** int				ft_strnequ(char const *s1, char const *s2, size_t n);
 */
 char				*ft_strchr(const char *s, int c);
+int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
+char				*ft_strstr(const char *haystack, const char *needle);
+char				*ft_strnstr(const char *haystack, const char *needle, size_t len);
+int					ft_strequ(char const *s1, char const *s2);
+int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strastr(const char *s1, const char *s2);
 size_t				ft_strastri(const char *s1, const char *s2);
 size_t				ft_strchri(const char *s, int c);
@@ -142,45 +133,38 @@ size_t				ft_strnchri(const char *s, int c, size_t n);
 size_t				ft_strlen(const char *s);
 size_t				ft_wstrlen(unsigned *str);
 size_t				ft_wcharlen(unsigned wc);
-int					ft_strcmp(const char *s1, const char *s2);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strlcmp(const char *s1, const char *s2);
-char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strrstr(const char *haystack, const char *needle);
 char				*ft_strrchr(const char *s, int c);
 
 /*
 ** --- String Set Functions ----------------------------------------------------
-**
-**
-**
-** size_t			ft_strlcat(char *s1, const char *s2, size_t n);
-** char				*ft_strncpy(char *dst, const char *src, size_t len);
-** void				ft_striter(char *s, void (*f)(char*));
-** void				ft_striteri(char *s, void (*f)(unsigned int, char *));
-** char				*ft_strmap(char const *s, char (*f)(char));
-** char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 */
 
 void				ft_strclr(char *s);
 void				ft_strdel(char **as);
 char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
+size_t				ft_strlcat(char *s1, const char *s2, size_t n);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
+char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strnew(size_t size);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_pathjoin(char const *s1, char const *s2);
-char				**ft_strsplit(char const *s, char c);
-char				**ft_strssplit(char const *s, char const *c);
-void				ft_free_sarray(char ***s);
 char				*ft_strtrim(char const *s);
+void				ft_striter(char *s, void (*f)(char *));
+void				ft_striteri(char *s, void (*f)(unsigned int, char *));
+char				*ft_strmap(char const *s, char (*f)(char));
+char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char				*ft_pathjoin(char const *s1, char const *s2);
+void				ft_free_sarray(char ***s);
 
 /*
-** --- Other Functions ---------------------------------------------------------
-** Function with unique properties.
+** --- Parsing Functions  ------------------------------------------------------
 */
 
+char				**ft_strsplit(char const *s, char c);
+char				**ft_strssplit(char const *s, char const *c);
 int					ft_gnl(const int fd, char **line, int keep_n);
 #endif
