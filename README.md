@@ -9,10 +9,13 @@ The **libft** library is the first real project from the [42](https://www.42.fr)
 - The [Libftest](https://github.com/jtoty/Libftest)
 
 ## Available Functions
-- :white_large_square: - Standard C Functions.
-- :black_large_square: - Non-Standard.
-- :white_circle: - Functions from the Libft Subject.
-- :black_circle: - Bonus Functions.
+:white_large_square: Standard C Functions.
+
+:black_large_square: Non Standard C Functions.
+
+:white_circle: Subject Functions.
+
+:black_circle: Bonus Functions.
 
 ### Print/Put Functions
 - :black_large_square::white_circle:	void	ft_putchar(char c);
