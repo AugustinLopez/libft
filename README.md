@@ -1,6 +1,4 @@
- <img src="https://github.com/AugustinLopez/libft/blob/master/rcs/HT_libft.png" width="110" align="right" />
- 
- # libft
+# libft
 
 The **libft** library is the first real project from the [42](https://www.42.fr) curriculum. While a 42 student rarely has access to external libraries, the use of our libft is always authorized and encouraged.
 
