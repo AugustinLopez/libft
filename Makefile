@@ -6,7 +6,7 @@
 #    By: aulopez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/03/20 12:31:44 by aulopez          ###   ########.fr        #
+#    Updated: 2019/03/22 09:49:07 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ STRSET=	strcat \
 _PARSE=	strsplit \
 		strssplit \
 		gnl
-_LIBFT=	$(_PUT) $(_MEM) $(_LIST) $(_IS) $(_TO) $(STRCHR) $(STRSET) $(_OTHER)
+_LIBFT=	$(_PUT) $(_MEM) $(_LIST) $(_IS) $(_TO) $(STRCHR) $(STRSET) $(_PARSE)
 
 PRINTF=	ft_printf \
 		pf_buffer \
