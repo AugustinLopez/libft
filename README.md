@@ -4,9 +4,12 @@ The **libft** library is the first real project from the [42](https://www.42.fr)
 
 ## Useful links
 - The [libft PDF subject](https://github.com/AugustinLopez/libft/blob/master/rcs/libft.pdf)
+- The [get_next_line PDF subject](https://github.com/AugustinLopez/libft/blob/master/rcs/get_next_line.pdf)
+- The [printf PDF subject](https://github.com/AugustinLopez/libft/blob/master/rcs/ft_printf.pdf)
 - The [GNU C Library Sources](https://sourceware.org/git/?p=glibc.git;a=summary)
 - The [42 File Checker](https://github.com/jgigault/42FileChecker)
 - The [Libftest](https://github.com/jtoty/Libftest)
+- The [ft_printf checker](https://github.com/jeremiemartel/ft_printf_checker)
 
 ## Available Functions
 Symbol | Meaning
