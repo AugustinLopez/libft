@@ -36,6 +36,7 @@ _LIST=	lstnew \
 		lstdel \
 		lstadd \
 		lstmap \
+		lstccpy \
 		lstiter \
 		lstinsert \
 		lstappend \
