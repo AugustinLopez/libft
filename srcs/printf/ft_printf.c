@@ -119,7 +119,10 @@ char	*ft_sprintf(const char *format, ...)
 		++pf.format;
 	}
 	if (pf.pc)
+	{
+		(pf.buff)[pf.index] = 0;
 		pf_char_write(&pf);
+	}
 	va_end(pf.ap);
 	return (pf.pc);
 }

@@ -40,14 +40,9 @@ void				pf_char_write(t_printf *pf)
 	char	*tmp;
 
 	tmp = pf->pc;
-	if (pf->index)
-		(pf->buff)[pf->index] = 0;
-	else
-		(pf->buff)[PF_BUFF_SIZE] = 0;
 	pf->pc = ft_strjoin(tmp, pf->buff);
 	if (tmp)
 		free(tmp);
-	ft_bzero(pf->buff, PF_BUFF_SIZE);
 }
 
 static inline void	pf_not_stdout(t_printf *pf, void *str, size_t size)
@@ -65,13 +60,14 @@ static inline void	pf_not_stdout(t_printf *pf, void *str, size_t size)
 		i += diff;
 		pf->len += diff;
 		if (pf->pc)
+		{
+			(pf->buff)[pf->index + diff] = 0;
 			pf_char_write(pf);
+		}
 		pf->index = 0;
 	}
 	ft_memcpy((void *)(pf->buff + pf->index),
 	(void *)((char *)(str) + i), size);
-	if (pf->pc)
-		pf_char_write(pf);
 	pf->index += size;
 	pf->len += size;
 }
