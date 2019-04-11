@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 09:58:36 by aulopez           #+#    #+#             */
-/*   Updated: 2019/03/18 15:35:52 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/04/11 12:53:27 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int				ft_gnl(const int fd, char **line, int keep_n)
 			buf[ret] = '\0';
 			if (!(tmp = ft_strjoin(neur->pv, buf))
 			|| ft_strlen(buf) != (unsigned int)ret)
-				return (free_mem_and_exit(0, 0, 0, &memory));
+				return (free_mem_and_exit(0, 0, &tmp, &memory));
 			(void)free_mem_and_exit(1, &neur, &tmp, 0);
 			if (ft_strchr(buf, '\n'))
 				break ;

@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:25:07 by aulopez           #+#    #+#             */
-/*   Updated: 2019/03/04 17:53:51 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/04/10 16:28:39 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static size_t	null_prot_nbr_word(const char *s, const char *c)
 
 	if (!s)
 		return (0);
+	while (ft_strchr(c, *s))
+		s++;
 	if (!*s)
 		return (0);
 	occurence = 1;
@@ -72,7 +74,7 @@ static char		**ft_desalloc(char ***p, size_t i)
 		free(*p[i]);
 	free(*p[0]);
 	free(*p);
-	return (*p);
+	return (0);
 }
 
 char			**ft_strssplit(char const *s, char const *c)
