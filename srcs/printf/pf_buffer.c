@@ -40,7 +40,6 @@ void				pf_char_write(t_printf *pf)
 	char	*tmp;
 
 	tmp = pf->pc;
-	(pf->buff)[pf->index] = 0;
 	pf->pc = ft_strjoin(tmp, pf->buff);
 	if (tmp)
 		free(tmp);
@@ -61,7 +60,10 @@ static inline void	pf_not_stdout(t_printf *pf, void *str, size_t size)
 		i += diff;
 		pf->len += diff;
 		if (pf->pc)
+		{
+			(pf->buff)[pf->index + diff] = 0;
 			pf_char_write(pf);
+		}
 		pf->index = 0;
 	}
 	ft_memcpy((void *)(pf->buff + pf->index),
