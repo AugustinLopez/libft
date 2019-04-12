@@ -6,7 +6,7 @@
 #    By: aulopez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/04/12 13:20:35 by aulopez          ###   ########.fr        #
+#    Updated: 2019/04/12 13:51:14 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,65 +132,96 @@ OBJ=$(OBJLIBFT) $(OBJPRINTF) $(OBJFTOA)
 
 # --- 4.Variables --------------------------------------------------------------
 
-CC=gcc -Werror -Wall -Wextra -pedantic -g3 -O3 -c -I$(PATH_1HDR) -I$(PATH_2HDR)
+CC_DEBUG=-pedantic -g3 -O3
+CC=gcc -Werror -Wall -Wextra $(CC_DEBUG) -c -I$(PATH_1HDR) -I$(PATH_2HDR)
 INCLUDES=$(1ST_HEADER:%=$(PATH_1HDR)%) $(2ND_HEADER:%=$(PATH_2HDR)%)
 
-BLACK=\033[30m
-RED=\033[31m
-GREEN=\033[32m
-YELLOW=\033[33m
-BLUE=\033[34m
-PURPLE=\033[35m
-CYAN=\033[36m
-WHITE=\033[37m
-EOC=\033[0m
+# Text Style
 BOLD=\033[1m
-ITALIC=\033[3m
-UNDER=\033[4m
-STRIKE=\033[9m
+_DIM=\033[2m
+ITAL=\033[3m
+UNDR=\033[4m
+INVR=\033[7m
+HIDE=\033[8m
+STRK=\033[9m
+RST_A=\033[0m
+RST_B=\033[21m
+RST_D=\033[22m
+RST_U=\033[24m
+RST_I=\033[27m
+RST_H=\033[28m
+RST_S=\033[29m
+
+# Foreground Color
+RST_FG=\033[39m
+FG_BLA=\033[30m
+FG_RED=\033[31m
+FG_GRE=\033[32m
+FG_YEL=\033[33m
+FG_BLU=\033[34m
+FG_PUR=\033[35m
+FG_CYA=\033[36m
+FG_WHI=\033[97m
+FG_LGRA=\033[37m
+FG_DGRA=\033[90m
+FG_LRED=\033[91m
+FG_LGRE=\033[92m
+FG_LYEL=\033[93m
+FG_LBLU=\033[94m
+FG_LPUR=\033[95m
+FG_LCYA=\033[96m
+
+# Backgroudn Color
+RST_BG=\033[49m
+BG_BLA=\033[40m
+BG_RED=\033[41m
+BG_GRE=\033[42m
+BG_YEL=\033[43m
+BG_BLU=\033[44m
+BG_PUR=\033[45m
+BG_CYA=\033[46m
+BG_WHI=\033[107m
+BG_LGRA=\033[47m
+BG_DGRA=\033[100m
+BG_LRED=\033[101m
+BG_LGRE=\033[102m
+BG_LYEL=\033[103m
+BG_LBLU=\033[104m
+BG_LPUR=\033[105m
+BG_LCYA=\033[106m
 
 # --- 5.Rules ------------------------------------------------------------------
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@printf "\r$(YELLOW)Object file creation:     $(GREEN)$(BOLD)Done.$(EOC)\n"
-	@printf "\r$(YELLOW)Compiling library: $(EOC)       "
+	@printf "\r$(FG_YEL)Object file creation:     $(FG_GRE)$(BOLD)Done.$(RST_A)\n"
+	@printf "\r$(FG_YEL)Compiling library: $(RST_A)       "
 	@ar rcs $(NAME) $(OBJ)
-	@printf "$(GREEN)$(BOLD)Done.$(EOC)\n"
+	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 $(PATH_OBJ)%.o:$(PATH_LIB)%.c $(INCLUDES)
-	@printf "\r$(PURPLE)$(ITALIC)Creating %-22s$(EOC)" "$@$ "
+	@printf "\r$(FG_PUR)$(ITAL)Creating %-22s$(RST_A)" "$@$ "
 	@$(CC) $< -o $@
 
 $(PATH_OBJ)%.o:$(PATH_PRINT)%.c $(INCLUDES)
-	@printf "\r$(BLUE)$(ITALIC)Creating %-22s$(EOC)" "$@$ "
+	@printf "\r$(FG_BLU)$(ITAL)Creating %-22s$(RST_A)" "$@$ "
 	@$(CC) $< -o $@
 
 $(PATH_OBJ)%.o:$(PATH_FTOA)%.c $(INCLUDES)
-	@printf "\r$(BLUE)$(ITALIC)Creating %-22s$(EOC)" "$@$ "
+	@printf "\r$(FG_BLU)$(ITAL)Creating %-22s$(RST_A)" "$@$ "
 	@$(CC) $< -o $@
 
 clean:
-	@printf "$(YELLOW)Deleting object files: $(EOC)   "
+	@printf "$(FG_YEL)Deleting object files: $(RST_A)   "
 	@rm -f $(OBJ)
-	@printf "$(GREEN)$(BOLD)Done.$(EOC)\n"
+	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 fclean: clean
-	@printf "$(YELLOW)Removing library: $(EOC)        "
+	@printf "$(FG_YEL)Removing library: $(RST_A)        "
 	@rm -f $(NAME)
-	@printf "$(GREEN)$(BOLD)Done.$(EOC)\n"
+	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 re: fclean all
 
 .PHONY: all clean fclean re
-
-
-# --- 6.Unused -----------------------------------------------------------------
-
-#R_LIST=	lstmap lstiter
-#R_MATH=	pow sqrt rand
-#R___IS=	isalnum isalpha isascii isdigit isprint
-#R___TO=	tolower toupper
-#RTRCHR=	strnstr strcount strequ strnequ
-#RTRSET=	strlcat strncpy striter striteri strmap strmapi
