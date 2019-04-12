@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:22:20 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/20 12:14:45 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/04/12 13:19:16 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void		ft_putnbr_fd(int n, int fd)
 	while ((buf /= 10))
 		++len;
 	if (n < 0)
-		write(fd, "-", 1);
+		(void)write(fd, "-", 1);
 	positif = n * (1 - 2 * (n < 0));
 	buf = puissance10(len);
 	len++;
 	while (len--)
 	{
 		c = positif / buf + '0';
-		write(fd, &c, 1);
+		(void)write(fd, &c, 1);
 		positif %= buf;
 		buf /= 10;
 	}

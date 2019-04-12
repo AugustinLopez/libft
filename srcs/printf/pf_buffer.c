@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 19:11:26 by aulopez           #+#    #+#             */
-/*   Updated: 2019/03/18 10:40:25 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/04/12 13:19:51 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static inline void	pf_stdout(t_printf *pf, void *str, size_t size)
 		size -= diff;
 		i += diff;
 		pf->len += diff;
-		write(pf->fd, pf->buff, pf->index + diff);
+		(void)write(pf->fd, pf->buff, pf->index + diff);
 		pf->index = 0;
 	}
 	ft_memcpy((void *)(pf->buff + pf->index),

@@ -6,7 +6,7 @@
 #    By: aulopez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/03/22 09:49:07 by aulopez          ###   ########.fr        #
+#    Updated: 2019/04/12 13:20:35 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,7 +132,7 @@ OBJ=$(OBJLIBFT) $(OBJPRINTF) $(OBJFTOA)
 
 # --- 4.Variables --------------------------------------------------------------
 
-CC=gcc -Werror -Wall -Wextra -pedantic -g3 -c -I$(PATH_1HDR) -I$(PATH_2HDR)
+CC=gcc -Werror -Wall -Wextra -pedantic -g3 -O3 -c -I$(PATH_1HDR) -I$(PATH_2HDR)
 INCLUDES=$(1ST_HEADER:%=$(PATH_1HDR)%) $(2ND_HEADER:%=$(PATH_2HDR)%)
 
 BLACK=\033[30m

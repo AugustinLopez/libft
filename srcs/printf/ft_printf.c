@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 19:11:18 by aulopez           #+#    #+#             */
-/*   Updated: 2019/02/06 11:09:55 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/04/12 13:20:07 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_printf(const char *format, ...)
 			pf_buffer_write(&pf, pf.format, 1);
 		++pf.format;
 	}
-	write(pf.fd, pf.buff, pf.index);
+	(void)write(pf.fd, pf.buff, pf.index);
 	va_end(pf.ap);
 	return (pf.len);
 }
@@ -63,7 +63,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 			pf_buffer_write(&pf, pf.format, 1);
 		++pf.format;
 	}
-	write(pf.fd, pf.buff, pf.index);
+	(void)write(pf.fd, pf.buff, pf.index);
 	va_end(pf.ap);
 	return (pf.len);
 }
