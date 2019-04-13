@@ -103,8 +103,9 @@ int				*create_unit_pos(int exposent, int dbl_tab)
 	int	j;
 	int	stack;
 
-	if (((dbl_tab == DBL_TAB) && !(unit = create_unit_pos_addentum()))
-		|| ((dbl_tab == LDBL_TAB) && !(unit = create_lunit_pos_addentum())))
+	unit = (dbl_tab == DBL_TAB) ?
+		create_unit_pos_addentum() : create_lunit_pos_addentum();
+	if (!unit || !unit[0])
 		return (0);
 	while (exposent--)
 	{

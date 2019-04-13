@@ -16,6 +16,7 @@ static inline void	pf_stdout(t_printf *pf, void *str, size_t size)
 {
 	size_t		i;
 	int			diff;
+	int			ret;
 
 	i = 0;
 	while ((size_t)(PF_BUFF_SIZE - pf->index) < size)
@@ -26,11 +27,12 @@ static inline void	pf_stdout(t_printf *pf, void *str, size_t size)
 		size -= diff;
 		i += diff;
 		pf->len += diff;
-		(void)write(pf->fd, pf->buff, pf->index + diff);
+		ret = write(pf->fd, pf->buff, pf->index + diff);
 		pf->index = 0;
 	}
 	ft_memcpy((void *)(pf->buff + pf->index),
 	(void *)((char *)str + i), size);
+	(void)ret;
 	pf->index += size;
 	pf->len += size;
 }

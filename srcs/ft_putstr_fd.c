@@ -15,7 +15,10 @@
 
 void	ft_putstr_fd(char const *c, int fd)
 {
+	int	ret;
+
 	if (!c)
 		return ;
-	(void)write(fd, c, ft_strlen(c));
+	ret = write(fd, c, ft_strlen(c));
+	(void)ret;
 }

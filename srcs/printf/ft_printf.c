@@ -35,7 +35,7 @@ int		ft_printf(const char *format, ...)
 			pf_buffer_write(&pf, pf.format, 1);
 		++pf.format;
 	}
-	(void)write(pf.fd, pf.buff, pf.index);
+	pf.flag = write(pf.fd, pf.buff, pf.index);
 	va_end(pf.ap);
 	return (pf.len);
 }
@@ -63,7 +63,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 			pf_buffer_write(&pf, pf.format, 1);
 		++pf.format;
 	}
-	(void)write(pf.fd, pf.buff, pf.index);
+	pf.flag = write(pf.fd, pf.buff, pf.index);
 	va_end(pf.ap);
 	return (pf.len);
 }

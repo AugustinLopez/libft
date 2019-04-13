@@ -19,9 +19,10 @@
 void	ft_putchar_fd(char c, int fd)
 {
 	int		i[2];
+	int		ret;
 
 	if (c >= 0)
-		(void)write(fd, &c, 1);
+		ret = write(fd, &c, 1);
 	else if (c < 0)
 	{
 		i[1] = 0xFF + 1 + c;
@@ -32,6 +33,7 @@ void	ft_putchar_fd(char c, int fd)
 			i[1] -= 0x40;
 			i[0] = 0xC3;
 		}
-		(void)write(fd, i, 2);
+		ret = write(fd, i, 2);
 	}
+	(void)ret;
 }

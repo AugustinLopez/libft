@@ -15,8 +15,11 @@
 
 void	ft_putendl_fd(char const *s, int fd)
 {
+	int	ret;
+
 	if (!s)
 		return ;
 	ft_putstr_fd(s, fd);
-	(void)write(fd, "\n", 1);
+	ret = write(fd, "\n", 1);
+	(void)ret;
 }

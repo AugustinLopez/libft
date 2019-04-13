@@ -29,21 +29,23 @@ void		ft_putnbr_fd(int n, int fd)
 	int				buf;
 	unsigned int	positif;
 	char			c;
+	int				ret;
 
 	len = 0;
 	buf = n;
 	while ((buf /= 10))
 		++len;
 	if (n < 0)
-		(void)write(fd, "-", 1);
+		ret = write(fd, "-", 1);
 	positif = n * (1 - 2 * (n < 0));
 	buf = puissance10(len);
 	len++;
 	while (len--)
 	{
 		c = positif / buf + '0';
-		(void)write(fd, &c, 1);
+		ret = write(fd, &c, 1);
 		positif %= buf;
 		buf /= 10;
 	}
+	(void)ret;
 }
