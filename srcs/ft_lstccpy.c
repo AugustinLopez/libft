@@ -17,7 +17,7 @@ t_list	*ft_lstccpy(t_list *lst)
 {
 	t_list	*elem;
 
-	if (!lst || !(elem = ft_lstnew(0,0)))
+	if (!lst || !(elem = ft_lstnew(0, 0)))
 		return (0);
 	elem->pv = ft_strdup(lst->pv);
 	elem->zu = lst->zu;

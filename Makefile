@@ -195,30 +195,30 @@ BG_LCYA=\033[106m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@printf "\r$(FG_YEL)Object file creation:     $(FG_GRE)$(BOLD)Done.$(RST_A)\n"
-	@printf "\r$(FG_YEL)Compiling library: $(RST_A)       "
+	@printf "\n$(FG_LYEL)Object files creation:   $(FG_GRE)$(BOLD)Done.$(RST_A)\n"
+	@printf "$(FG_LYEL)Compiling library: $(RST_A)      "
 	@ar rcs $(NAME) $(OBJ)
 	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 $(PATH_OBJ)%.o:$(PATH_LIB)%.c $(INCLUDES)
-	@printf "\r$(FG_PUR)$(ITAL)Creating %-22s$(RST_A)" "$@$ "
+	@printf "$(FG_GRE).$(RST_A)"
 	@$(CC) $< -o $@
 
 $(PATH_OBJ)%.o:$(PATH_PRINT)%.c $(INCLUDES)
-	@printf "\r$(FG_BLU)$(ITAL)Creating %-22s$(RST_A)" "$@$ "
+	@printf "$(FG_LGRE).$(RST_A)"
 	@$(CC) $< -o $@
 
 $(PATH_OBJ)%.o:$(PATH_FTOA)%.c $(INCLUDES)
-	@printf "\r$(FG_BLU)$(ITAL)Creating %-22s$(RST_A)" "$@$ "
+	@printf "$(FG_LYEL).$(RST_A)"
 	@$(CC) $< -o $@
 
 clean:
-	@printf "$(FG_YEL)Deleting object files: $(RST_A)   "
+	@printf "$(FG_LRED)Deleting object files: $(RST_A)  "
 	@rm -f $(OBJ)
 	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 fclean: clean
-	@printf "$(FG_YEL)Removing library: $(RST_A)        "
+	@printf "$(FG_LRED)Removing library: $(RST_A)       "
 	@rm -f $(NAME)
 	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 

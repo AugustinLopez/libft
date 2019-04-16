@@ -95,6 +95,15 @@ int		ft_nprintf(const char *format, ...)
 	return (pf.len);
 }
 
+void	end_sprintf(t_printf *pf)
+{
+	if (pf->pc)
+	{
+		(pf->buff)[pf->index] = 0;
+		pf_char_write(pf);
+	}
+}
+
 char	*ft_sprintf(const char *format, ...)
 {
 	t_printf	pf;
@@ -118,11 +127,7 @@ char	*ft_sprintf(const char *format, ...)
 			pf_buffer_write(&pf, pf.format, 1);
 		++pf.format;
 	}
-	if (pf.pc)
-	{
-		(pf.buff)[pf.index] = 0;
-		pf_char_write(&pf);
-	}
+	end_sprintf(&pf);
 	va_end(pf.ap);
 	return (pf.pc);
 }
