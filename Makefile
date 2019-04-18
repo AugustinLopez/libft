@@ -6,7 +6,7 @@
 #    By: aulopez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/04/12 13:51:14 by aulopez          ###   ########.fr        #
+#    Updated: 2019/04/18 10:53:04 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -201,7 +201,7 @@ $(NAME): $(OBJ)
 	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 $(PATH_OBJ)%.o:$(PATH_LIB)%.c $(INCLUDES)
-	@printf "$(FG_GRE).$(RST_A)"
+	@printf "$(FG_YEL).$(RST_A)"
 	@$(CC) $< -o $@
 
 $(PATH_OBJ)%.o:$(PATH_PRINT)%.c $(INCLUDES)
@@ -209,7 +209,7 @@ $(PATH_OBJ)%.o:$(PATH_PRINT)%.c $(INCLUDES)
 	@$(CC) $< -o $@
 
 $(PATH_OBJ)%.o:$(PATH_FTOA)%.c $(INCLUDES)
-	@printf "$(FG_LYEL).$(RST_A)"
+	@printf "$(FG_GRE).$(RST_A)"
 	@$(CC) $< -o $@
 
 clean:
