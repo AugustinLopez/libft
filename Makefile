@@ -171,7 +171,7 @@ FG_LBLU=\033[94m
 FG_LPUR=\033[95m
 FG_LCYA=\033[96m
 
-# Backgroudn Color
+# Background Color
 RST_BG=\033[49m
 BG_BLA=\033[40m
 BG_RED=\033[41m
@@ -195,10 +195,9 @@ BG_LCYA=\033[106m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@printf "\n$(FG_LYEL)Object files creation:   $(FG_GRE)$(BOLD)Done.$(RST_A)\n"
-	@printf "$(FG_LYEL)Compiling library: $(RST_A)      "
+	@printf "\n$(FG_LYEL)Object files creation:   $(FG_GRE)$(BOLD)Done.$(RST_A)  \n"
 	@ar rcs $(NAME) $(OBJ)
-	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
+	@printf "$(FG_LYEL)Compiling library:       $(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 $(PATH_OBJ)%.o:$(PATH_LIB)%.c $(INCLUDES)
 	@printf "$(FG_YEL).$(RST_A)"
@@ -213,14 +212,12 @@ $(PATH_OBJ)%.o:$(PATH_FTOA)%.c $(INCLUDES)
 	@$(CC) $< -o $@
 
 clean:
-	@printf "$(FG_LRED)Deleting object files: $(RST_A)  "
 	@rm -f $(OBJ)
-	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
+	@printf "$(FG_LRED)Deleting object files:   $(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 fclean: clean
-	@printf "$(FG_LRED)Removing library: $(RST_A)       "
 	@rm -f $(NAME)
-	@printf "$(FG_GRE)$(BOLD)Done.$(RST_A)\n"
+	@printf "$(FG_LRED)Removing library:        $(FG_GRE)$(BOLD)Done.$(RST_A)\n"
 
 re: fclean all
 
