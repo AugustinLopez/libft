@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 12:17:22 by aulopez           #+#    #+#             */
-/*   Updated: 2019/01/21 16:24:46 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/04/23 10:53:15 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_bigint.h"
 
 int				create_stack_pos(int **unit, int **stack, int exposent,
-								uint64_t mantissa)
+					uint64_t mantissa)
 {
 	uint64_t	ll;
 	int			i;
@@ -40,7 +40,7 @@ int				create_stack_pos(int **unit, int **stack, int exposent,
 }
 
 int				create_lstack_pos(int **unit, int **stack, int exposent,
-								uint64_t mantissa)
+					uint64_t mantissa)
 {
 	uint64_t	ll;
 	int			i;
@@ -66,7 +66,7 @@ int				create_lstack_pos(int **unit, int **stack, int exposent,
 }
 
 int				create_lstack_neg(int **unit, int **stack, int exposent,
-							uint64_t mantissa)
+					uint64_t mantissa)
 {
 	uint64_t	ll;
 	int			i;
@@ -96,7 +96,7 @@ int				create_lstack_neg(int **unit, int **stack, int exposent,
 }
 
 int				create_stack_neg(int **unit, int **stack, int exposent,
-							uint64_t mantissa)
+					uint64_t mantissa)
 {
 	uint64_t	ll;
 	int			i;
