@@ -36,6 +36,8 @@
 ** EXP_MAX + 1 : the value will be inf or nan.
 ** MIN_EXP is the number of bits in the mantissa - 1, not including the first
 **	(hidden or not) bit.
+** For rounding conflict: I round to upper border.
+** Rounding to the even/odd number would be better to avoid systematic errors.
 */
 
 # define DBL_TAB 121
