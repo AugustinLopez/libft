@@ -91,7 +91,8 @@ STRSET=	strcat \
 		free_sarray
 _PARSE=	strsplit \
 		strssplit \
-		gnl
+		gnl \
+		flagarg
 _LIBFT=	$(_PUT) $(_MEM) $(_LIST) $(_IS) $(_TO) $(STRCHR) $(STRSET) $(_PARSE)
 
 PRINTF=	ft_printf \
