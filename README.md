@@ -10,6 +10,7 @@ The **libft** library is the first real project from the [42](https://www.42.fr)
 - The [42 File Checker](https://github.com/jgigault/42FileChecker)
 - The [Libftest](https://github.com/jtoty/Libftest)
 - The [ft_printf checker](https://github.com/jeremiemartel/ft_printf_checker)
+- The [IEEE 754 Standard for Floating-Point](https://ieeexplore.ieee.org/document/4610935)
 
 ## Available Functions
 Symbol | Meaning

@@ -13,6 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <stdint.h>
 
 typedef struct		s_list
 {
@@ -163,7 +164,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *haystack, const char *needle,
-								size_t len);
+						size_t len);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strastr(const char *s1, const char *s2);
@@ -207,4 +208,6 @@ void				ft_free_sarray(char ***s);
 char				**ft_strsplit(char const *s, char c);
 char				**ft_strssplit(char const *s, char const *c);
 int					ft_gnl(const int fd, char **line, int keep_n);
+int					ft_flagarg(int ac, char **av, uint32_t *flag,
+						char *options);
 #endif
