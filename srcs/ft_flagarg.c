@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 10:56:56 by aulopez           #+#    #+#             */
-/*   Updated: 2019/05/31 10:56:56 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/06/07 10:10:12 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 ** invalid "option".
 ** - If a character is a valid option, it will activate a bit depending on the
 ** position in the string *option. See EXAMPLE SETUP for reference.
-** - Use # define to quickly access relevant bit.
+** - I advice using # define to quickly access relevant bit.
 **
 ** EXAMPLE SETUP:
 ** # define OPTION "abC1"
@@ -63,7 +63,7 @@ int					ft_flagarg(int ac, char **av, uint32_t *flag, char *options)
 		{
 			if (!(j = ft_strchri(options, *tmp)))
 				return (0);
-			*flag |= (1 << (i - 1));
+			*flag |= (1 << (j - 1));
 		}
 	}
 	return (i);
