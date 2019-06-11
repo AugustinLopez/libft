@@ -17,7 +17,7 @@ void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
 	t_list *temp;
 
-	if (!alst || !del)
+	if (!alst || !*alst || !del)
 		return ;
 	del((*alst)->pv, (*alst)->zu);
 	temp = (*alst)->next;
