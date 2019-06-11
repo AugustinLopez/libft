@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 12:09:06 by aulopez           #+#    #+#             */
-/*   Updated: 2019/01/21 16:40:24 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/06/06 12:29:13 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int				*create_unit_pos(int exposent, int dbl_tab)
 	int	j;
 	int	stack;
 
-	unit = (dbl_tab == DBL_TAB) ?
-		create_unit_pos_addentum() : create_lunit_pos_addentum();
+	unit = (dbl_tab == DBL_TAB)
+		? create_unit_pos_addentum() : create_lunit_pos_addentum();
 	if (!unit || !unit[0])
 		return (0);
 	while (exposent--)
