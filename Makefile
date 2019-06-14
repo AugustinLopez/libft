@@ -133,7 +133,7 @@ OBJ=$(OBJLIBFT) $(OBJPRINTF) $(OBJFTOA)
 
 # --- 4.Variables --------------------------------------------------------------
 
-CC_DEBUG=-pedantic -g3 -O3
+CC_DEBUG=-pedantic -g3
 CC=gcc -Werror -Wall -Wextra $(CC_DEBUG) -c -I$(PATH_1HDR) -I$(PATH_2HDR)
 INCLUDES=$(1ST_HEADER:%=$(PATH_1HDR)%) $(2ND_HEADER:%=$(PATH_2HDR)%)
 
