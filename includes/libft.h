@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 08:40:39 by aulopez           #+#    #+#             */
-/*   Updated: 2019/05/13 18:06:46 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/06/16 13:18:36 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,4 +210,10 @@ char				**ft_strssplit(char const *s, char const *c);
 int					ft_gnl(const int fd, char **line, int keep_n);
 int					ft_flagarg(int ac, char **av, uint32_t *flag,
 						char *options);
+
+/*
+** --- Math Functions ----------------------------------------------------------
+*/
+
+int					ft_abs(int a);
 #endif
