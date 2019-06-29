@@ -35,12 +35,12 @@ Symbol | Meaning
 - :black_large_square::black_circle:	int		ft_nprintf(const char \*format, ...);
 
 ### Raw Memory Functions
-- :white_large_square::white_circle:	void	ft_memdel(void \*\*ap);
 - :white_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
 - :white_large_square::white_circle:	[ft_memset]( https://github.com/AugustinLopez/libft/wiki/memset )
 - :white_large_square::white_circle:	void	\*ft_memcpy(void \*dst, const void \*src, size_t n);
 - :white_large_square::white_circle:	void	\*ft_memccpy(void \*dst, const void \*src, int c, size_t n);
 - :white_large_square::white_circle:	void	\*ft_memmove(void \*dst, const void \*src, size_t len);
+- :black_large_square::white_circle:	[ft_memdel]( https://github.com/AugustinLopez/libft/wiki/memdel )
 - :white_large_square::white_circle:	void	\*ft_memchr(const void \*s, int c, size_t n);
 - :black_large_square::white_circle:	void	\*ft_memalloc(size_t size);
 - :black_large_square::white_circle:	int		ft_memcmp(const void \*s1, const void \*s2, size_t n); 
