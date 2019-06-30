@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <time.h>
+#include <sys/mman.h>
 
 int		*g_c;
 int		*g_l;
@@ -31,14 +32,28 @@ static inline void	set_global(void *ptr_mem, int *chr, int *len)
 
 static inline void	signal_core(int signo)
 {
+	int	fd;
+
+	fd = STDERR_FILENO;
 	signal(signo, SIG_DFL);
 	if (!g_ptr || *g_ptr)
-		dprintf(STDERR_FILENO, "Char: %d - len: %d\n", *g_c, *g_l);
+		dprintf(fd, "Char: %d - len: %d\n", *g_c, *g_l);
 	else if (g_ptr)
-		dprintf(STDERR_FILENO, "Char: %d - len: %d - ptr: %p\n"
-				, *g_c, *g_l, *g_ptr);
+		dprintf(fd, "Char: %d - len: %d - ptr: %p\n", *g_c, *g_l, *g_ptr);
 	raise(signo);
 }
+
+static inline void	signal_bad_access(int signo)
+{
+	int	fd;
+
+	fd = STDERR_FILENO;
+	signal(signo, SIG_DFL);
+	dprintf(fd,
+		"ft_memset: attempt to read byte on unauthorized memory area\n");
+	raise(signo);
+}
+
 
 static inline void	signal_crash_expected(int signo)
 {
@@ -202,76 +217,22 @@ static inline int	test_null_ptr(void)
 	return (1);
 }
 
-static inline double	speeder(size_t len, size_t *l, size_t *s)
+static inline int	test_memory_access(void)
 {
-	char	mem[100000];
-	clock_t	chrono;
-	clock_t	start;
+	void	*map;
+	int		i;
 
-	chrono = 0;
-	*s = 0;
-	*l = 0;
-	memset(mem, 'a', len);
-	start = clock();
-	while (chrono < 5 * CLOCKS_PER_SEC)
+	map = mmap(NULL, 8192, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
+			-1, 0);
+	memset(map, 0xff, 8192);
+	mprotect(map + 4096, 4096, PROT_NONE);
+	i = 0;
+	signal(SIGSEGV, signal_bad_access);
+	while (i < 4096)
 	{
-		memset(mem, 'a', len);
-		(*s)++;
-		chrono = clock() - start;
+		ft_memset(map + 4096 - i, 0, i);
+		i++;
 	}
-	chrono = 0;
-	start = clock();
-	while (chrono < 5 * CLOCKS_PER_SEC)
-	{
-		ft_memset(mem, 'a', len);
-		(*l)++;
-		chrono = clock() - start;
-	}
-	return ((double)(*l)/(double)(*s) * 100);
-}
-
-
-static inline int	test_speed(void)
-{
-	size_t	l;
-	size_t	s;
-
-	printf("TEST_1:  (1)      ");
-	printf("%6.2f%% ", speeder(1, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_2:  (7)      ");
-	printf("%6.2f%% ", speeder(7, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_3:  (8)      ");
-	printf("%6.2f%% ", speeder(8, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_4:  (64)     ");
-	printf("%6.2f%% ", speeder(64, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_5:  (128)    ");
-	printf("%6.2f%% ", speeder(128, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_6:  (256)    ");
-	printf("%6.2f%% ", speeder(128, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_7:  (512)    ");
-	printf("%6.2f%% ", speeder(512, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_8:  (1024)   ");
-	printf("%6.2f%% ", speeder(1024, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_9:  (2048)   ");
-	printf("%6.2f%% ", speeder(2048, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_10: (4096)   ");
-	printf("%6.2f%% ", speeder(4096, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_11: (10000)  ");
-	printf("%6.2f%% ", speeder(10000, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
-	printf("TEST_12: (100000) ");
-	printf("%6.2f%% ", speeder(100000, &l, &s));
-	printf("(%zu / %zu)\n", l, s);
 	return (0);
 }
 
@@ -295,8 +256,8 @@ int					main(int ac, char **av)
 	else if (option == '3')
 		ret = test_null_len();
 	else if (option == '4')
-		ret = test_speed();
-	if (!ret && option != '4')
+		ret = test_memory_access();
+	if (!ret)
 		printf("Success\n");
 	return (ret);
 }

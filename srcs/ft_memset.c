@@ -6,62 +6,47 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 14:56:45 by aulopez           #+#    #+#             */
-/*   Updated: 2019/06/14 09:48:41 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/06/30 09:28:58 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include <stdint.h>
 
-/*
-** FT_MEMSET:
-** <string.h> for size_t, <stdint.h> for uint64_t
-**
-** if len < 8, we set 1 byte per iteration.
-** if len >= 8:
-** - We first need to align the memory: the pointer address value must be a
-**   multiple of 8. We just have to check the last 3 bit. The alignment will
-**   take up to 7 iterations, with 1 byte set per operation.
-** - We create a mask and use it to set 8 bytes per iteration. This allow for
-** a faster setup of big block of memory.
-** - When less than 8 bytes to set remains, we set 1 byte per iteration.
-*/
-
-static inline uint64_t	set_memory(uint64_t **magic, void *pc, int c)
+static inline long long	set_mask(int c)
 {
-	uint64_t	bmagic;
+	long long	mask;
 
-	bmagic = c & 0xff;
-	bmagic = (bmagic << 8) | bmagic;
-	bmagic = (bmagic << 16) | bmagic;
-	bmagic = (bmagic << 32) | bmagic;
-	*magic = (uint64_t *)pc;
-	return (bmagic);
+	mask = c & 0xff;
+	mask = (mask << 8) | mask;
+	mask = (mask << 16) | mask;
+	mask = (mask << 32) | mask;
+	return (mask);
 }
 
-void					*ft_memset(void *b, int c, size_t len)
+void					*ft_memset(void *s, int c, size_t n)
 {
-	uint64_t	bmagic;
-	uint64_t	*magic;
+	long long	mask;
+	long long	*pll;
 	char		*pc;
 
-	pc = (char *)b;
-	if (len >= 8)
+	pc = (char *)s;
+	if (n >= 8)
 	{
-		while (((size_t)pc & 0x7))
+		while (((long long)pc & 0x7))
 		{
-			*pc++ = c;
-			--len;
+			*pc++ = (char)c;
+			--n;
 		}
-		bmagic = set_memory(&magic, (void *)pc, c);
-		while (len >= 8)
+		mask = set_mask(c);
+		pll = (long long *)pc;
+		while (n >= 8)
 		{
-			*magic++ = bmagic;
-			len -= 8;
+			*pll++ = mask;
+			n -= 8;
 		}
-		pc = (char *)magic;
+		pc = (char *)pll;
 	}
-	while (len--)
-		*pc++ = c;
-	return (b);
+	while (n--)
+		*pc++ = (char)c;
+	return (s);
 }
