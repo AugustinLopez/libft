@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aulopez <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/06/16 13:15:14 by aulopez          ###   ########.fr        #
+#    Updated: 2019/06/30 23:11:02 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
+CC_DEBUG=
 
 # --- 1.Source/Header ----------------------------------------------------------
 
@@ -134,7 +135,6 @@ OBJ=$(OBJLIBFT) $(OBJPRINTF) $(OBJFTOA)
 
 # --- 4.Variables --------------------------------------------------------------
 
-CC_DEBUG=-O2
 CC=gcc -Werror -Wall -Wextra $(CC_DEBUG) -c -I$(PATH_1HDR) -I$(PATH_2HDR)
 INCLUDES=$(1ST_HEADER:%=$(PATH_1HDR)%) $(2ND_HEADER:%=$(PATH_2HDR)%)
 

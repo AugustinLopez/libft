@@ -1,13 +1,11 @@
 make -C ../../../
 gcc behavior_memset.c ../../../libft.a -I../../../includes -o behavior
-printf 'test CHAR\n'
+printf 'CHAR -          '
 ./behavior 0
-printf 'test SIZE\n'
+printf 'SIZE -          '
 ./behavior 1
-printf 'test NULL_PTR\n'
+printf 'NULL_PTR -      '
 ./behavior 2
-printf 'test NULL_LEN\n'
-./behavior 2
-printf 'test MEMORY_ACCESS\n'
-./behavior 4
+printf 'MEMORY_ACCESS - '
+./behavior 3
 rm ./behavior
