@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:04:50 by aulopez           #+#    #+#             */
-/*   Updated: 2019/06/30 10:59:33 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/01 14:36:59 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void				*ft_memcpy(void *restrict s1, const void *restrict s2,
 	long long	*lldst;
 	long long	*llsrc;
 
+	if (!s1 && !s2)
+		return (s1);
 	cdst = (char *)s1;
 	csrc = (char *)s2;
 	if ((n >= 8) && (((long long)s1 & 0x7) == ((long long)s2 & 0x7)))

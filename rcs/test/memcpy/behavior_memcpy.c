@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 10:17:33 by aulopez           #+#    #+#             */
-/*   Updated: 2019/06/14 10:17:33 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/01 14:34:53 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static inline void	crash_expected(int signo)
 static inline void	crash_unexpected(int signo)
 {
 	printf("Crash\n");
-	exit(EXIT_FAILURE);
+	signal(signo, SIG_DFL);
+	raise(signo);
 }
 
 static inline void	set_signal(void)
@@ -99,8 +100,9 @@ static inline int	test_memory_access(void)
 static inline int	test_segfault(int option)
 {
 	signal(SIGSEGV, crash_expected);
+	signal(SIGBUS, crash_expected);
 	if (option == 0)
-		ft_memcpy("", "1", 1);
+		memcpy("", "1", 1);
 	if (option == 1)
 		ft_memcpy(NULL, NULL, 1);
 	if (option == 2)

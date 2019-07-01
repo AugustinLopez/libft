@@ -6,23 +6,21 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:08:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/01 18:06:34 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/01 15:29:02 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-static inline unsigned char	*longword(unsigned char *restrict pc,
-								unsigned char c, size_t *restrict n)
+static inline char	*longword(char *pc, unsigned char c, size_t *n)
 {
-	long long	*pll;
-	long long	one_each_byte;
-	long long	c_each_byte;
-	long long	loopword;
+	long long		one_each_byte;
+	long long		c_each_byte;
+	long long		loopword;
 
-	pll = (long long *)pc;
+	pll = (const long long *)pc;
 	one_each_byte = 0x0101010101010101;
-	c_each_byte = c | (c << 8);
+	c_each_byte = c | ( c << 8);
 	c_each_byte |= c_each_byte << 16;
 	c_each_byte |= c_each_byte << 32;
 	while (*n >= 8)
@@ -33,24 +31,28 @@ static inline unsigned char	*longword(unsigned char *restrict pc,
 		pll++;
 		*n -= 8;
 	}
-	return ((unsigned char *)pll);
+	return ((char *)pll);
 }
 
-void						*ft_memchr(const void *s, int c, size_t n)
+void				*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*pc;
+	unsigned char	chr;
+	const char		*pc;
 
-	pc = (unsigned char *)s;
-	while ((long long)pc & 0x7)
+	chr = (unsigned char)c;
+	pc = (char *)s;
+	if (n >= 8)
 	{
-		if (*pc++ == (unsigned char)c)
-			return (--pc);
-		if (!--n)
-			return (NULL);
+		while ((long long)pc & 0x7)
+		{
+			if (*pc++ == chr)
+				return (--pc);
+			--n;
+		}
+		pc = longword(pc, chr, &n);
 	}
-	pc = longword(pc, (unsigned char)c, &n);
 	while (n--)
-		if (*pc++ == (unsigned char)c)
+		if (*pc++ == chr)
 			return (--pc);
 	return (NULL);
 }
