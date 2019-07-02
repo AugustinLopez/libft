@@ -6,17 +6,17 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:04:50 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/01 14:36:59 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/02 12:33:22 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-static inline void	align_address(char *cdst, char *csrc, size_t *n)
+static inline void	align_address(char **cdst, char **csrc, size_t *n)
 {
 	while ((long long)cdst & 0x7)
 	{
-		*cdst++ = *csrc++;
+		*((*cdst)++) = *((*csrc)++);
 		--(*n);
 	}
 }
@@ -35,7 +35,7 @@ void				*ft_memcpy(void *restrict s1, const void *restrict s2,
 	csrc = (char *)s2;
 	if ((n >= 8) && (((long long)s1 & 0x7) == ((long long)s2 & 0x7)))
 	{
-		align_address(cdst, csrc, &n);
+		align_address(&cdst, &csrc, &n);
 		lldst = (long long *)cdst;
 		llsrc = (long long *)csrc;
 		while (n >= 8)
