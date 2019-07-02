@@ -7,10 +7,8 @@ printf 'MEMORY ACCESS : '
 printf 'SEGFAULT 1 :    '
 ./behavior 2
 printf 'SEGFAULT 2 :    '
-./behavior 3
-printf 'SEGFAULT 3 :    '
 ./behavior 4
-printf 'SEFGAULT 4 :    '
+printf 'SEFGAULT 3 :    '
 ./behavior 5
 printf 'NO REACTION :   '
 ./behavior 6

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 10:17:33 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/01 14:34:53 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/02 14:23:06 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,6 @@ int					main(int ac, char **av)
 		ret = test_memory_access();
 	else if (option == '2')
 		ret = test_segfault(0);
-	else if (option == '3')
-		ret = test_segfault(1);
 	else if (option == '4')
 		ret = test_segfault(2);
 	else if (option == '5')

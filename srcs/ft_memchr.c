@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:08:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/01 18:06:34 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/02 14:43:19 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static inline unsigned char	*longword(unsigned char *restrict pc,
 	long long	loopword;
 
 	pll = (long long *)pc;
-	one_each_byte = 0x0101010101010101;
+	one_each_byte = 0x0101010101010101L;
 	c_each_byte = c | (c << 8);
 	c_each_byte |= c_each_byte << 16;
 	c_each_byte |= c_each_byte << 32;
