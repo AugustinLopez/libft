@@ -35,8 +35,8 @@ Symbol | Meaning
 - :black_large_square::black_circle:	int		ft_nprintf(const char \*format, ...);
 
 ### Raw Memory Functions
-- :white_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
 - :white_large_square::white_circle:	[ft_memset]( https://github.com/AugustinLopez/libft/wiki/memset )
+- :white_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
 - :white_large_square::white_circle:	[ft_memcpy]( https://github.com/AugustinLopez/libft/wiki/memcpy )
 - :white_large_square::white_circle:	void	\*ft_memccpy(void \*dst, const void \*src, int c, size_t n);
 - :white_large_square::white_circle:	void	\*ft_memmove(void \*dst, const void \*src, size_t len);
