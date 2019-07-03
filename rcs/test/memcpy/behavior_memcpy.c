@@ -10,43 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
+#include "testing.h"
 #include <string.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <signal.h>
-#include <time.h>
-#include <sys/mman.h>
 
-static inline void	crash_expected(int signo)
+static inline int	test_undefined(int option,
+						void *(*mem)(void *, const void *, size_t))
 {
-	printf("Success\n");
-	exit(EXIT_SUCCESS);
+	signal(SIGSEGV, crash_expected);
+	signal(SIGBUS, crash_expected);
+	if (option == 0)
+		mem("", "1", 1);
+	if (option == 1)
+		mem(NULL, NULL, 1);
+	if (option == 2)
+		mem(NULL, "1", 1);
+	if (option == 3)
+		mem("1", NULL, 1);
+	if (option == 4)
+		mem(NULL, NULL, 0);
+	if (option == 5)
+		mem(NULL, "1", 0);
+	if (option == 6)
+		mem("1", NULL, 0);
+	return (10);
 }
 
-static inline void	crash_unexpected(int signo)
-{
-	printf("Crash\n");
-	signal(signo, SIG_DFL);
-	raise(signo);
-}
-
-static inline void	set_signal(void)
-{
-	signal(SIGBUS, crash_unexpected);
-	signal(SIGSEGV, crash_unexpected);
-	signal(SIGABRT, crash_unexpected);
-	signal(SIGFPE, crash_unexpected);
-	signal(SIGILL, crash_unexpected);
-	signal(SIGTRAP, crash_unexpected);
-	signal(SIGSYS, crash_unexpected);
-	signal(SIGXCPU, crash_unexpected);
-	signal(SIGXFSZ, crash_unexpected);
-	signal(SIGQUIT, crash_unexpected);
-}
-
-static inline int	test_general(void)
+static inline int	test_general(void *(*mem)(void *, const void *, size_t))
 {
 	char	src[4096];
 	char	sys_dst[4096];
@@ -63,64 +55,35 @@ static inline int	test_general(void)
 		memset(sys_dst, 0, i);
 		memset(lib_dst, 0, i);
 		memcpy(sys_dst, src, i);
-		pc = ft_memcpy(lib_dst, src, i);
+		pc = mem(lib_dst, src, i);
 		if (memcmp(lib_dst, sys_dst, i))
 			return (1);
 		else if (pc != lib_dst)
-			return (1);
+			return (2);
 		i++;
 	}
 	return (0);
 }
 
-static inline int	test_memory_access(void)
+static inline int	test_memory(void *(*mem)(void *, const void *, size_t))
 {
 	void	*dst;
 	void	*src;
 	size_t	i;
 
-	dst = mmap(0, 8192, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
-	src = mmap(0, 8192, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
-	memset(dst, 0, 8192);
-	memset(src, 0xff, 8192);
-	mprotect(dst + 4096, 4096, PROT_NONE);
-	mprotect(src + 4096, 4096, PROT_NONE);
+	if (!(dst = protected_memory(4096)))
+		return (-1);
+	if (!(src = protected_memory(4096)))
+		return (-1);
 	i = 0;
-	while (i < 4096)
-	{
-		ft_memcpy(dst + 4096 - i, src + 4096 - i, i);
-		i++;
-	}
-	i--;
-	if (((char *)src)[i] == ((char *)dst)[i])
+	while (i++ < 4096)
+		mem(dst + 4096 - i, src + 4096 - i, i);
+	if (memcmp(dst, src, 4096))
 		return (0);
 	return (1);
 }
 
-static inline int	test_segfault(int option)
-{
-	signal(SIGSEGV, crash_expected);
-	signal(SIGBUS, crash_expected);
-	if (option == 0)
-		memcpy("", "1", 1);
-	if (option == 1)
-		ft_memcpy(NULL, NULL, 1);
-	if (option == 2)
-		ft_memcpy(NULL, "1", 1);
-	if (option == 3)
-		ft_memcpy("1", NULL, 1);
-	return (1);
-}
-
-static inline int	test_no_reaction(void)
-{
-	ft_memcpy(NULL, NULL, 0);
-	ft_memcpy(NULL, "1", 0);
-	ft_memcpy("1", NULL, 0);
-	return (0);
-}
-
-static inline int	test_misaligned(void)
+static inline int	test_misaligned(void *(*mem)(void *, const void *, size_t))
 {
 	char	src[4096];
 	char	sys_dst[4096];
@@ -137,7 +100,7 @@ static inline int	test_misaligned(void)
 		memset(sys_dst, 0, i);
 		memset(lib_dst, 0, i);
 		memcpy(sys_dst + i, src, 4096 - i);
-		pc = ft_memcpy(lib_dst + i, src, 4096 - i );
+		pc = mem(lib_dst + i, src, 4096 - i );
 		if (memcmp(lib_dst, sys_dst, 4096 - i))
 			return (1);
 		else if (pc != lib_dst + i)
@@ -145,7 +108,6 @@ static inline int	test_misaligned(void)
 		i++;
 	}
 	return (0);
-
 }
 
 int					main(int ac, char **av)
@@ -153,27 +115,49 @@ int					main(int ac, char **av)
 	int		option;
 	int		ret;
 
-	if (ac < 2 || !(option = av[1][0]))
+	if (!setup(ac, av))
 		return (0);
-	ret = 10;
-	set_signal();
+	ret = -1;
+	option = av[1][0];
 	if (option == '0')
-		ret = test_general();
+		ret = test_general(*ft_memcpy);
 	else if (option == '1')
-		ret = test_memory_access();
+		ret = test_general(*memcpy);
 	else if (option == '2')
-		ret = test_segfault(0);
+		ret = test_memory(*ft_memcpy);
+	else if (option == '3')
+		ret = test_memory(*memcpy);
 	else if (option == '4')
-		ret = test_segfault(2);
+		ret = test_misaligned(*ft_memcpy);
 	else if (option == '5')
-		ret = test_segfault(3);
+		ret = test_misaligned(*memcpy);
 	else if (option == '6')
-		ret = test_no_reaction();
+		ret = test_undefined(0, *ft_memcpy);
 	else if (option == '7')
-		ret = test_misaligned();
-	if (!ret)
-		printf("Success\n");
-	else
-		printf("Failure\n");
-	return (ret);
+		ret = test_undefined(0, *memcpy);
+	else if (option == '8')
+		ret = test_undefined(1, *ft_memcpy);
+	else if (option == '9')
+		ret = test_undefined(1, *memcpy);
+	else if (option == 'a')
+		ret = test_undefined(2, *ft_memcpy);
+	else if (option == 'b')
+		ret = test_undefined(2, *memcpy);
+	else if (option == 'c')
+		ret = test_undefined(3, *ft_memcpy);
+	else if (option == 'd')
+		ret = test_undefined(3, *memcpy);
+	else if (option == 'e')
+		ret = test_undefined(4, *ft_memcpy);
+	else if (option == 'f')
+		ret = test_undefined(4, *memcpy);
+	else if (option == 'g')
+		ret = test_undefined(5, *ft_memcpy);
+	else if (option == 'h')
+		ret = test_undefined(5, *memcpy);
+	else if (option == 'i')
+		ret = test_undefined(6, *ft_memcpy);
+	else if (option == 'j')
+		ret = test_undefined(6, *memcpy);
+	return (cleanup(ret));
 }

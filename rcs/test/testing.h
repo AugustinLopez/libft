@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   testing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:08:47 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/15 10:02:04 by aulopez          ###   ########.fr       */
+/*   Created: 2019/07/03 13:09:30 by aulopez           #+#    #+#             */
+/*   Updated: 2019/07/03 13:09:30 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#ifndef TESTING_H
+# define TESTING_H
 
-void	*ft_memchr(const void *s, int c, size_t n)
-{
-	char	*buf;
+void	crash_unexpected(int signo);
+void	crash_expected(int signo);
+void	*protected_memory(int i);
+int		setup(int ac, char **av);
+int		cleanup(int ret);
 
-	buf = (char*)s;
-	while (n--)
-		if (*(buf++) == (char)c)
-			return (--buf);
-	return (0);
-}
+#endif

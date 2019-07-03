@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:08:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/02 14:43:19 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/03 23:37:35 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,26 @@ static inline unsigned char	*longword(unsigned char *restrict pc,
 	return ((unsigned char *)pll);
 }
 
-void						*ft_memchr(const void *s, int c, size_t n)
+void						*ft_memchr(const void *restrict s, int c, size_t n)
 {
 	unsigned char	*pc;
 
 	pc = (unsigned char *)s;
 	while ((long long)pc & 0x7)
 	{
-		if (*pc++ == (unsigned char)c)
-			return (--pc);
+		if (*pc == (unsigned char)c)
+			return (pc);
+		++pc;
 		if (!--n)
 			return (NULL);
 	}
-	pc = longword(pc, (unsigned char)c, &n);
+	if (n >= 8)
+		pc = longword(pc, (unsigned char)c, &n);
 	while (n--)
-		if (*pc++ == (unsigned char)c)
-			return (--pc);
+	{
+		if (*pc == (unsigned char)c)
+			return (pc);
+		++pc;
+	}
 	return (NULL);
 }

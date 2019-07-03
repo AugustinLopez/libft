@@ -12,13 +12,18 @@
 
 #include <string.h>
 
+/*
+** Cannot directly imcrement the ptr: may cause segfault
+*/
 static inline int	align_address(unsigned char **cdst, unsigned char **csrc,
 						unsigned char c, size_t *n)
 {
-	while ((long long)cdst & 0x7)
+	while ((long long)*cdst & 0x7)
 	{
-		if ((*(*cdst++) = *(*csrc++)) == c)
+		if ((**cdst = **csrc) == c)
 			return (1);
+		(*cdst)++;
+		(*csrc)++;
 		--(*n);
 	}
 	return (0);
@@ -64,11 +69,15 @@ void				*ft_memccpy(void *restrict dst, const void *restrict src,
 	if ((n >= 8) && (((long long)dst & 0x7) == ((long long)src & 0x7)))
 	{
 		if (align_address(&cdst, &csrc, (unsigned char)c, &n))
-			return (cdst);
+			return (cdst + 1);
 		longword(&cdst, &csrc, (unsigned char)c, &n);
 	}
 	while (n--)
-		if ((*cdst++ = *csrc++) == (unsigned char)c)
-			return (cdst);
+	{
+		if ((*cdst = *csrc) == (unsigned char)c)
+			return (cdst + 1);
+		cdst++;
+		csrc++;
+	}
 	return (NULL);
 }
