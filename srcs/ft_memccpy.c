@@ -62,8 +62,6 @@ void				*ft_memccpy(void *restrict dst, const void *restrict src,
 	unsigned char	*cdst;
 	unsigned char	*csrc;
 
-	if (!dst && !src)
-		return (dst);
 	cdst = (unsigned char *)dst;
 	csrc = (unsigned char *)src;
 	if ((n >= 8) && (((long long)dst & 0x7) == ((long long)src & 0x7)))

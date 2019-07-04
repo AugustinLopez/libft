@@ -49,10 +49,12 @@ static inline int	test_memcpy_general(void *(*mem)
 
 	i = 0;
 	pc = lib_dst;
+	
+	memset(src, 0, 4096);
 	while (i < 4096)
 	{
 		if (i)
-			memset(src + i - 1, 1, i);
+			memset(src + i - 1, 1, 4096 - i);
 		memset(sys_dst, 0, i);
 		memset(lib_dst, 0, i);
 		memccpy(sys_dst, src, 0, i);
@@ -185,7 +187,9 @@ static inline int	test_memory(void *(*mem)
 	i = 0;
 	while (i++ < 4096)
 		ft_memccpy(dst + 4096 - i, src + 4096 - i, 1, i - 1);
-	if (memcmp(dst, src, 4096))
+	memset(dst, 0xff, 4096);
+	memset(src, 0xff, 4096);
+	if (!memcmp(dst, src, 4096))
 		return (0);
 	return (1);
 }

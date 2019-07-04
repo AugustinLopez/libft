@@ -78,7 +78,7 @@ static inline int	test_memory(void *(*mem)(void *, const void *, size_t))
 	i = 0;
 	while (i++ < 4096)
 		mem(dst + 4096 - i, src + 4096 - i, i);
-	if (memcmp(dst, src, 4096))
+	if (!memcmp(dst, src, 4096))
 		return (0);
 	return (1);
 }

@@ -72,7 +72,7 @@ static inline int	test_size(void)
 	size_t	i;
 
 	i = 0;
-	memset(src, 1, 4097);
+	memset(src, 1, 4096);
 	while (i < 4096)
 	{
 		if (memchr(src, 0, i) != ft_memchr(src, 0, i))
@@ -82,7 +82,7 @@ static inline int	test_size(void)
 		src[i++] = 0;
 	}
 	i = 0;
-	memset(src, 0, 4097);
+	memset(src, 0, 4096);
 	while (i < 4096)
 	{
 		if (memchr(src, 1, i) != ft_memchr(src, 1, i))

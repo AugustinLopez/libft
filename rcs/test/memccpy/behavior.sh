@@ -48,5 +48,4 @@ printf '\n"1", NULL, 10, 0 -  '
 ./behavior m
 printf 'System result is    '
 ./behavior n
-
 rm ./behavior
