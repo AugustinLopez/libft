@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 16:10:13 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/20 11:45:49 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/05 20:10:48 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include "libft.h"
+
+/*size_t	ft_strlcat(char *s1, const char *s2, size_t size)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+
+	j = ft_strlen(s2);
+	if (!s1 && !size)
+		return (j);
+	i = ft_strlen(s1);
+	if (i > size)
+		return (size + j);
+	if (!size || !j)
+		return (i + j);
+	if (size > i)
+	{
+		k = j < size - i - 1 ? j : size - i - 1;
+		ft_memccpy(s1, s2, 0, k);
+	}
+	return (i + j);
+}*/
 
 size_t	ft_strlcat(char *s1, const char *s2, size_t size)
 {

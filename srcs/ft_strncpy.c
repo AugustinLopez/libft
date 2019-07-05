@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:02:50 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/20 11:23:41 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/05 20:03:52 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include "libft.h"
+
+/*char	*ft_strncpy(char *dst, const char *src, size_t len)
+{
+	ft_memccpy(dst, src, 0, len);
+	return (dst);
+}*/
+
 
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
