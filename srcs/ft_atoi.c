@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 14:00:55 by aulopez           #+#    #+#             */
-/*   Updated: 2019/04/11 15:39:44 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/05 23:20:28 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 
-static int	check_long(long unsigned int ui, const char sign)
+static inline int	check_long(long unsigned int ui, const char sign)
 {
 	if (sign == -1 && ui > LLONG_MAX)
 		return (0);
@@ -21,7 +21,7 @@ static int	check_long(long unsigned int ui, const char sign)
 	return (ui * sign);
 }
 
-int			ft_atoi(const char *src)
+int					ft_atoi(const char *src)
 {
 	char				sign;
 	long unsigned int	ui;

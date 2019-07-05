@@ -6,14 +6,14 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 10:29:13 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/05 19:20:40 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/05 20:25:42 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdint.h>
 
-size_t	ft_strlen(const char *s)
+/*size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -21,14 +21,13 @@ size_t	ft_strlen(const char *s)
 	while (*(s++))
 		i++;
 	return (i);
-}
+}*/
 
-/*
+
 static inline size_t	longword(const char *restrict s, size_t n)
 {
 	const uint64_t	*pu64;
 	uint64_t		one_each_byte;
-	uint64_t		loopword;
 	size_t			len;
 
 	len = n;
@@ -39,14 +38,14 @@ static inline size_t	longword(const char *restrict s, size_t n)
 		if (((*pu64 - one_each_byte) & ~*pu64) & (one_each_byte << 7))
 			break ;
 		++pu64;
-		*n += 8;
+		len += 8;
 	}
 	s = (const char *)pu64;
 	while (1)
 	{
 		if (!*s++)
-			return (n);
-		++n;
+			return (len);
+		++len;
 	}
 	return (0);
 }
@@ -64,4 +63,3 @@ size_t	ft_strlen(const char *s)
 	}
 	return (longword(s, n));
 }
-*/

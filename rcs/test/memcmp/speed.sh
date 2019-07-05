@@ -21,3 +21,4 @@ echo ''
 
 ./speed 1000000
 echo ''
+rm ./speed

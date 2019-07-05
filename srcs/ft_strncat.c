@@ -6,14 +6,14 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:13:54 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/05 20:09:26 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/05 20:43:06 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "libft.h"
 
-char	*ft_strncat(char *s1, const char *s2, size_t n)
+/*char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
 	char *buf;
 
@@ -27,13 +27,13 @@ char	*ft_strncat(char *s1, const char *s2, size_t n)
 	*s1 = '\0';
 	return (buf);
 }
+*/
 
-
-/*char	*ft_strncat(char *s1, const char *s2, size_t n)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
 	i = ft_strlen(s1);
-	ft_memccpy(s1, s2, 0, n);
+	ft_memccpy(s1 + i, s2, 0, n);
 	return (s1);
-}*/
+}

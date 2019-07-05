@@ -6,9 +6,11 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/15 09:33:15 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/05 23:17:09 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
@@ -16,7 +18,9 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	const char	*ne;
 
 	if (!*needle)
-		return ((char*)haystack);
+		return ((char *)haystack);
+	if (!(haystack = ft_strchr(haystack, *needle)))
+		return ((char *)haystack);
 	while (*haystack)
 	{
 		if (*haystack == *needle && *haystack)

@@ -6,14 +6,14 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 10:29:03 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/05 20:02:44 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/05 20:26:31 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+/*char	*ft_strdup(const char *s1)
 {
 	char	*buf;
 	size_t	i;
@@ -28,9 +28,9 @@ char	*ft_strdup(const char *s1)
 		buf[i++] = *(s1++);
 	buf[i] = '\0';
 	return (buf);
-}
+}*/
 
-/*char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	char	*buf;
 	size_t	i;
@@ -41,4 +41,4 @@ char	*ft_strdup(const char *s1)
 	ft_memcpy(buf, s1, i);
 	buf[i] = 0;
 	return (buf);
-}*/
+}
