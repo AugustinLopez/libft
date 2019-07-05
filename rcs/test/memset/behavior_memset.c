@@ -15,23 +15,29 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <stdio.h>
+
+int		g_debug = 0;
 
 static inline int	test_memory_access(void *(*mem)(void *, int, size_t))
 {
 	void	*map;
-	size_t	i;
+	size_t	len;
 
 	if (!(map = protected_memory(4096)))
 		return (-1);
-	i = 0;
-	while (i++ < 4096)
-		mem(map + 4096 - i, (char)i, i);
-	i--;
-	if (((char *)map)[1] == (char)i)
-		i = 0;
+	len = 0;
+	while (len++ < 4096)
+	{
+		g_debug ? printf("len = %.4zu\n", len) : (void)0;
+		mem(map + 4096 - len, (char)len, len);
+	}
+	len--;
+	if (((char *)map)[1] == (char)len)
+		len = 0;
 	else
-		i = 1;
-	return (i);
+		len = 1;
+	return (len);
 }
 
 static inline int	test_general(void)
@@ -44,6 +50,8 @@ static inline int	test_general(void)
 	len = 0;
 	while (len < 4096)
 	{
+		if (g_debug)
+			printf("len = %.4zu | char = |%d|\n", len, (char)len);
 		memset(sys_mem, (char)len, len);
 		fix_ptr = ft_memset(lib_mem, (char)len, len);
 		if (fix_ptr != lib_mem)
@@ -71,11 +79,9 @@ static inline int	test_undefined(void *(*mem)(void *, int, size_t),
 		if (!(map = protected_memory(4096)))
 			return (-1);
 		mem(map + 4096, 0, 1);
-		free(map);
 	}
 	return (10);
 }
-
 
 int					main(int ac, char **av)
 {
@@ -84,7 +90,9 @@ int					main(int ac, char **av)
 
 	if (!setup(ac, av))
 		return (0);
-	ret = -1;
+	if (ac > 2)
+		g_debug = 1;
+	ret = 10;
 	if ((option = av[1][0]) == '0')
 		ret = test_general();
 	else if (option == '1')
