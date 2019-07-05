@@ -6,13 +6,13 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 14:56:45 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/03 09:06:22 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/04 23:55:28 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-static inline long long	set_mask(char c)
+static inline long long	set_mask(unsigned char c)
 {
 	long long	mask;
 
@@ -25,28 +25,28 @@ static inline long long	set_mask(char c)
 
 void					*ft_memset(void *s, int c, size_t n)
 {
-	long long	mask;
-	long long	*pll;
-	char		*pc;
+	long long		mask;
+	long long		*pll;
+	unsigned char	*pc;
 
-	pc = (char *)s;
+	pc = (unsigned char *)s;
 	if (n >= 8)
 	{
 		while (((long long)pc & 0x7))
 		{
-			*pc++ = (char)c;
+			*pc++ = (unsigned char)c;
 			--n;
 		}
-		mask = set_mask((char)c);
+		mask = set_mask((unsigned char)c);
 		pll = (long long *)pc;
 		while (n >= 8)
 		{
 			*pll++ = mask;
 			n -= 8;
 		}
-		pc = (char *)pll;
+		pc = (unsigned char *)pll;
 	}
 	while (n--)
-		*pc++ = (char)c;
+		*pc++ = (unsigned char)c;
 	return (s);
 }
