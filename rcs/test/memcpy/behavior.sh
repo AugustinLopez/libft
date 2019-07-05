@@ -41,4 +41,3 @@ printf '\n"1", NULL, 0 -   '
 printf 'System result is '
 ./behavior j
 
-rm ./behavior
