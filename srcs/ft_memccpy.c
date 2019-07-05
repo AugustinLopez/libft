@@ -10,69 +10,71 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include <string.h>
 
-static inline int	align_address(unsigned char **cdst, unsigned char **csrc,
-						unsigned char c, size_t *n)
+static inline int	align_address(unsigned char **restrict cs1,
+						unsigned char **restrict cs2,
+						const unsigned char c, size_t *restrict n)
 {
-	while ((unsigned long long)*cdst & 0x7)
+	while ((uintptr_t)*cs1 & 0x7)
 	{
-		if ((**cdst = **csrc) == c)
+		if ((**cs1 = **cs2) == c)
 			return (1);
-		(*cdst)++;
-		(*csrc)++;
+		(*cs1)++;
+		(*cs2)++;
 		--(*n);
 	}
 	return (0);
 }
 
-static inline void	longword(unsigned char **cdst, unsigned char **csrc,
-								unsigned char c, size_t *restrict n)
+static inline void	longword(unsigned char **cs1, unsigned char **cs2,
+								const unsigned char c, size_t *restrict n)
 {
-	unsigned long long	*lldst;
-	unsigned long long	*llsrc;
-	unsigned long long	one_each_byte;
-	unsigned long long	c_each_byte;
-	unsigned long long	loopword;
+	uint64_t	*lls1;
+	uint64_t	*lls2;
+	uint64_t	one_each_byte;
+	uint64_t	c_each_byte;
+	uint64_t	loopword;
 
-	lldst = (unsigned long long *)*cdst;
-	llsrc = (unsigned long long *)*csrc;
+	lls1 = (uint64_t *)*cs1;
+	lls2 = (uint64_t *)*cs2;
 	one_each_byte = 0x0101010101010101L;
 	c_each_byte = c | (c << 8);
 	c_each_byte |= c_each_byte << 16;
 	c_each_byte |= c_each_byte << 32;
 	while (*n >= 8)
 	{
-		loopword = *llsrc ^ c_each_byte;
+		loopword = *lls2 ^ c_each_byte;
 		if (((loopword - one_each_byte) & ~loopword) & (one_each_byte << 7))
 			break ;
-		*lldst++ = *llsrc++;
+		*lls1++ = *lls2++;
 		*n -= 8;
 	}
-	*cdst = (unsigned char *)lldst;
-	*csrc = (unsigned char *)llsrc;
+	*cs1 = (unsigned char *)lls1;
+	*cs2 = (unsigned char *)lls2;
 }
 
-void				*ft_memccpy(void *restrict dst, const void *restrict src,
+void				*ft_memccpy(void *restrict s1, const void *restrict s2,
 						int c, size_t n)
 {
-	unsigned char	*cdst;
-	unsigned char	*csrc;
+	unsigned char	*cs1;
+	unsigned char	*cs2;
 
-	cdst = (unsigned char *)dst;
-	csrc = (unsigned char *)src;
-	if ((n >= 8) && (((unsigned long long)dst & 0x7) == ((unsigned long long)src & 0x7)))
+	cs1 = (unsigned char *)s1;
+	cs2 = (unsigned char *)s2;
+	if ((n >= 8) && (((uintptr_t)s1 & 0x7) == ((uintptr_t)s2 & 0x7)))
 	{
-		if (align_address(&cdst, &csrc, (unsigned char)c, &n))
-			return (cdst + 1);
-		longword(&cdst, &csrc, (unsigned char)c, &n);
+		if (align_address(&cs1, &cs2, (unsigned char)c, &n))
+			return (cs1 + 1);
+		longword(&cs1, &cs2, (const unsigned char)c, &n);
 	}
 	while (n--)
 	{
-		if ((*cdst = *csrc) == (unsigned char)c)
-			return (cdst + 1);
-		cdst++;
-		csrc++;
+		if ((*cs1 = *cs2) == (unsigned char)c)
+			return (cs1 + 1);
+		cs1++;
+		cs2++;
 	}
 	return (NULL);
 }

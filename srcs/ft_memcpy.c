@@ -10,42 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include <string.h>
 
-static inline void	longword(char **cdst, char **csrc, size_t *n)
+static inline void	longword(unsigned char **restrict cs1,
+						unsigned char **restrict cs2,
+						size_t *restrict n)
 {
-	long long	*lldst;
-	long long	*llsrc;
+	uint64_t	*ulls1;
+	uint64_t	*ulls2;
 
-	while ((long long)*cdst & 0x7)
+	while ((uintptr_t)*cs1 & 0x7)
 	{
-		*((*cdst)++) = *((*csrc)++);
+		*((*cs1)++) = *((*cs2)++);
 		--(*n);
 	}
-		lldst = (long long *)*cdst;
-		llsrc = (long long *)*csrc;
+		ulls1 = (uint64_t *)*cs1;
+		ulls2 = (uint64_t *)*cs2;
 		while (*n >= 8)
 		{
-			*lldst++ = *llsrc++;
+			*ulls1++ = *ulls2++;
 			*n -= 8;
 		}
-		*cdst = (char *)lldst;
-		*csrc = (char *)llsrc;
+		*cs1 = (unsigned char *)ulls1;
+		*cs2 = (unsigned char *)ulls2;
 }
 
-void				*ft_memcpy(void *restrict dst, const void *restrict src,
+void				*ft_memcpy(void *restrict s1, const void *restrict s2,
 						size_t n)
 {
-	char		*cdst;
-	char		*csrc;
+	unsigned char	*cs1;
+	unsigned char	*cs2;
 
-	if (!dst && !src)
-		return (dst);
-	cdst = (char *)dst;
-	csrc = (char *)src;
-	if ((n >= 8) && (((long long)dst & 0x7) == ((long long)src & 0x7)))
-		longword(&cdst, &csrc, &n);
+	if (!s1 && !s2)
+		return (s1);
+	cs1 = (unsigned char *)s1;
+	cs2 = (unsigned char *)s2;
+	if ((n >= 8) && (((uintptr_t)s1 & 0x7) == ((uintptr_t)s2 & 0x7)))
+		longword(&cs1, &cs2, &n);
 	while (n--)
-		*cdst++ = *csrc++;
-	return (dst);
+		*cs1++ = *cs2++;
+	return (s1);
 }

@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include <string.h>
 
-static inline long long	set_mask(unsigned char c)
+static inline uint64_t	set_mask(unsigned char c)
 {
-	long long	mask;
+	uint64_t	mask;
 
 	mask = c & 0xff;
 	mask = (mask << 8) | mask;
@@ -25,26 +26,26 @@ static inline long long	set_mask(unsigned char c)
 
 void					*ft_memset(void *s, int c, size_t n)
 {
-	long long		mask;
-	long long		*pll;
+	uint64_t		mask;
+	uint64_t		*pu64;
 	unsigned char	*pc;
 
 	pc = (unsigned char *)s;
 	if (n >= 8)
 	{
-		while (((long long)pc & 0x7))
+		while (((uintptr_t)pc & 0x7))
 		{
 			*pc++ = (unsigned char)c;
 			--n;
 		}
 		mask = set_mask((unsigned char)c);
-		pll = (long long *)pc;
+		pu64 = (uint64_t *)pc;
 		while (n >= 8)
 		{
-			*pll++ = mask;
+			*pu64++ = mask;
 			n -= 8;
 		}
-		pc = (unsigned char *)pll;
+		pc = (unsigned char *)pu64;
 	}
 	while (n--)
 		*pc++ = (unsigned char)c;

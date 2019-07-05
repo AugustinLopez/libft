@@ -10,48 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdint.h>
 #include "libft.h"
 
-static inline void	longword(char **cdst, char **csrc, size_t *n)
+static inline void	longword(unsigned char **cs1, const unsigned char **cs2,
+						size_t *restrict n)
 {
-	long long	*lldst;
-	long long	*llsrc;
+	uint64_t		*lls1;
+	const uint64_t	*lls2;
 
-	while (((long long)*cdst & 0x7))
+	while (((uintptr_t)*cs1 & 0x7))
 	{
-		*((*cdst)--) = *((*csrc)--);
+		*((*cs1)--) = *((*cs2)--);
 		--(*n);
 	}
-	**cdst = **csrc;
-	lldst = (long long *)*cdst - 1;
-	llsrc = (long long *)*csrc - 1;
+	**cs1 = **cs2;
+	lls1 = (uint64_t *)*cs1 - 1;
+	lls2 = (const uint64_t *)*cs2 - 1;
 	while (*n >= 8)
 	{
-		*lldst-- = *llsrc--;
+		*lls1-- = *lls2--;
 		*n -= 8;
 	}
 	if (*n)
 	{
-		*cdst = (char *)lldst - 1;
-		*csrc = (char *)llsrc - 1;
+		*cs1 = (unsigned char *)lls1 - 1;
+		*cs2 = (const unsigned char *)lls2 - 1;
 	}
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	char		*cdst;
-	char		*csrc;
+	unsigned char		*cs1;
+	const unsigned char	*cs2;
 
-	if (dst <= src)
-		return (ft_memcpy(dst, src, len));
-	if (!len || (!dst && !src))
-		return (dst);
-	cdst = (char *)dst + len - 1;
-	csrc = (char *)src + len - 1;
-	if ((len >= 15) && (((long long)dst & 0x7) == ((long long)src & 0x7)))
-		longword(&cdst, &csrc, &len);
-	while (len--)
-		*cdst-- = *csrc--;
-	return (dst);
+	if (s1 <= s2)
+		return (ft_memcpy(s1, s2, n));
+	if (!n || (!s1 && !s2))
+		return (s1);
+	cs1 = (unsigned char *)s1 + n - 1;
+	cs2 = (const unsigned char *)s2 + n - 1;
+	if ((n >= 15) && (((uintptr_t)s1 & 0x7) == ((uintptr_t)s2 & 0x7)))
+		longword(&cs1, &cs2, &n);
+	while (n--)
+		*cs1-- = *cs2--;
+	return (s1);
 }

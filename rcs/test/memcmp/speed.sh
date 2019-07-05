@@ -1,5 +1,5 @@
 make -C ../../../
-gcc speed_memccpy.c ../../../libft.a -I../../../includes -o speed
+gcc -g3 speed_memcmp.c ../../../libft.a -I../../../includes -o speed
 
 ./speed 1
 echo ''
@@ -21,4 +21,3 @@ echo ''
 
 ./speed 1000000
 echo ''
-rm ./speed

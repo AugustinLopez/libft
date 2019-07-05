@@ -10,17 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include <string.h>
 
-static inline unsigned char	*longword(unsigned char *restrict pc,
-								unsigned char c, size_t *restrict n)
+static inline const unsigned char	*longword(const unsigned char *restrict pc,
+										const unsigned char c,
+										size_t *restrict n)
 {
-	long long	*pll;
-	long long	one_each_byte;
-	long long	c_each_byte;
-	long long	loopword;
+	const uint64_t	*pll;
+	uint64_t		one_each_byte;
+	uint64_t		c_each_byte;
+	uint64_t		loopword;
 
-	pll = (long long *)pc;
+	pll = (const uint64_t *)pc;
 	one_each_byte = 0x0101010101010101L;
 	c_each_byte = c | (c << 8);
 	c_each_byte |= c_each_byte << 16;
@@ -33,28 +35,28 @@ static inline unsigned char	*longword(unsigned char *restrict pc,
 		pll++;
 		*n -= 8;
 	}
-	return ((unsigned char *)pll);
+	return ((const unsigned char *)pll);
 }
 
 void						*ft_memchr(const void *restrict s, int c, size_t n)
 {
-	unsigned char	*pc;
+	const unsigned char	*pc;
 
-	pc = (unsigned char *)s;
-	while ((long long)pc & 0x7)
+	pc = (const unsigned char *)s;
+	while ((uintptr_t)pc & 0x7)
 	{
 		if (*pc == (unsigned char)c)
-			return (pc);
+			return ((void *)pc);
 		++pc;
 		if (!--n)
 			return (NULL);
 	}
 	if (n >= 8)
-		pc = longword(pc, (unsigned char)c, &n);
+		pc = longword(pc, (const unsigned char)c, &n);
 	while (n--)
 	{
 		if (*pc == (unsigned char)c)
-			return (pc);
+			return ((void *)pc);
 		++pc;
 	}
 	return (NULL);
