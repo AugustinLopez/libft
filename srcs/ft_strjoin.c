@@ -3,42 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:24:15 by aulopez           #+#    #+#             */
-/*   Updated: 2019/03/11 16:32:18 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 11:13:45 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static size_t	null_prot_strlen(char const *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (s)
-		while (*s++)
-			i++;
-	return (i);
-}
+#include <string.h>
+#include <stdlib.h>
 
 char			*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*p;
-	char	*cbuf;
-	size_t	len1;
-	size_t	len2;
+	char	*pc;
+	size_t	n1;
+	size_t	n2;
 
-	len1 = null_prot_strlen(s1);
-	len2 = null_prot_strlen(s2);
-	if (!(p = ft_strnew(len1 + len2)))
+	n1 = ft_strlen(s1);
+	n2 = ft_strlen(s2);
+	if (!(pc = (char *)malloc(sizeof(char) * (n1 + n2 + 1))))
 		return (0);
-	cbuf = p;
-	while (len1--)
-		*(p++) = *(s1++);
-	while (len2--)
-		*(p++) = *(s2++);
-	*p = 0;
-	return (cbuf);
+	ft_strncpy(pc, s1, n1);
+	ft_strncpy(pc + n1, s2, n2);
+	pc[n1 + n2] = 0;
+	return (pc);
 }

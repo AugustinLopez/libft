@@ -6,40 +6,22 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:02:50 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/05 20:40:54 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 09:53:48 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "libft.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+char	*ft_strncpy(char *restrict s1, const char *restrict s2, size_t n)
 {
 	char	*pc;
-	size_t	n;
+	size_t	len;
 
-	if ((pc = ft_memccpy(dst, src, 0, len)))
+	if ((pc = ft_memccpy(s1, s2, 0, n)))
 	{
-		n = pc - dst;
-		ft_bzero(pc, len - n);
+		len = pc - s1;
+		ft_bzero(pc, n - len);
 	}
-	return (dst);
+	return (s1);
 }
-
-/*
-char	*ft_strncpy(char *dst, const char *src, size_t len)
-{
-	char *buf;
-
-	if (!len)
-		return (dst);
-	buf = dst;
-	len++;
-	while (*src && --len)
-		*(dst++) = *(src++);
-	if (len--)
-		while (len--)
-			if (*dst)
-				*(dst++) = '\0';
-	return (buf);
-}*/

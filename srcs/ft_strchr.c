@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/05 22:12:48 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 10:04:46 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*char	*ft_strchr(const char *s, int c)
-{
-	if (*s == c)
-		return ((char*)s);
-	while (*(s++))
-		if (*s == c)
-			return ((char*)s);
-	return (0);
-}*/
-
 #include "libft.h"
 #include <stdint.h>
+
+/*
+** Basic implementation
+*/
+
+/*
+**char	*ft_strchr(const char *s, int c)
+**{
+**	if (*s == c)
+**		return ((char*)s);
+**	while (*(s++))
+**		if (*s == c)
+**			return ((char*)s);
+**	return (0);
+**}
+*/
 
 static inline char	*basic_strchr(char *s, char c)
 {

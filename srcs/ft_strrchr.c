@@ -3,36 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/05 22:51:11 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 10:07:13 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*char	*ft_strrchr(const char *s, int c)
-{
-	char	*buf;
-
-	buf = 0;
-	if (*s == c)
-		buf = (char*)s;
-	while (*(s++))
-		if (*s == c)
-			buf = (char*)s;
-	return (buf);
-}*/
 
 #include "libft.h"
 #include <stdint.h>
 
+/*
+** Basic implementation
+*/
 
-static inline char *longword(char *restrict s, char c)
+/*
+**char	*ft_strrchr(const char *s, int c)
+**{
+**	char	*pc;
+**
+**	pc = 0;
+**	if (*s == c)
+**		pc = (char*)s;
+**	while (*(s++))
+**		if (*s == c)
+**			pc = (char*)s;
+**	return (pc);
+**}
+*/
+
+static inline char *loopword(char *restrict s, char c)
 {
 	const uint64_t *pll;
 	uint64_t		one_each_byte;
 	uint64_t		c_each_byte;
-	uint64_t		loopword;
+	uint64_t		zero_mask;
 	const char		*pc;
 
 	pll = (const uint64_t *)s;
@@ -43,10 +48,10 @@ static inline char *longword(char *restrict s, char c)
 	pc = NULL;
 	while (1)
 	{
-		loopword = *pll ^ c_each_byte;
+		zero_mask = *pll ^ c_each_byte;
 		if (((*pll - one_each_byte) & ~*pll) & (one_each_byte << 7))
 			break ;
-		if (((loopword - one_each_byte) & ~loopword) & (one_each_byte << 7))
+		if (((zero_mask - one_each_byte) & ~zero_mask) & (one_each_byte << 7))
 			pc = (char *)pll;
 		pll++;
 	}
@@ -57,17 +62,16 @@ static inline char *longword(char *restrict s, char c)
 
 static inline char	*basic_strrchr(char *s, int c)
 {
-	char	*buf;
+	char	*pc;
 
-	buf = NULL;
+	pc = NULL;
 	if (*s == c)
-		buf = s;
+		pc = s;
 	while (*(s++))
 		if (*s == c)
-			buf = s;
-	return (buf);
+			pc = s;
+	return (pc);
 }
-
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -83,7 +87,7 @@ char	*ft_strrchr(const char *s, int c)
 		if (!*s++)
 			return (pc);
 	}
-	if (!(s = (const char *)longword((char *)s, (char)c)))
+	if (!(s = (const char *)loopword((char *)s, (char)c)))
 		return (pc);
 	pc = (char *)s;
 	return (basic_strrchr(pc, c));

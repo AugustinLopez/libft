@@ -3,17 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:23:08 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/20 12:08:53 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 10:57:58 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include <stdint.h>
+
+/*
+** Basic implementation
+*/
+
+/*
+**void	ft_strclr(char *s)
+**{
+**	while (*s)
+**		*s++ = 0;
+**}
+*/
+
 void	ft_strclr(char *s)
 {
-	if (!s)
-		return ;
+	uint64_t	*lls;
+	uint64_t	one_each_byte;
+
+	while ((uintptr_t)s & 0x7)
+	{
+		if (!*s)
+			return ;
+		*s++ = 0;
+	}
+	lls = (uint64_t *)s;
+	one_each_byte = 0x0101010101010101L;
+	while (1)
+	{
+		if (((*lls - one_each_byte) & ~*lls) & (one_each_byte << 7))
+			break ;
+		*lls++ = 0;
+	}
+	s = (char *)lls;
 	while (*s)
-		*(s++) = 0;
+		*s++ = 0;
 }

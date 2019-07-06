@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:24:00 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/19 10:47:45 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 11:02:06 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	size_t	i;
 
-	if (!s || !f)
-		return ;
 	i = 0;
 	while (s[i])
 	{

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:24:40 by aulopez           #+#    #+#             */
-/*   Updated: 2018/11/21 15:39:42 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 11:02:21 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
@@ -19,8 +20,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*cbuf;
 	unsigned int	i;
 
-	if (!s || !f)
-		return (0);
 	len = ft_strlen((char*)s);
 	if (!(p = ft_strnew(len)))
 		return (0);

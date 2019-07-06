@@ -6,12 +6,32 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 11:33:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/05 12:38:20 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 09:24:59 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include "libft.h"
+
+/*
+** Basic implementation
+*/
+
+/*
+**void	*ft_memmove(void *s1, const void *s2, size_t n)
+**{
+**	unsigned char		*cs1;
+**	const unsigned char	*cs2;
+**
+**	if (s1 <= s2)
+**		return (ft_memcpy(s1, s2, n));
+**	cs1 = (unsigned char *)s1;
+**	cs2 = (const unsigned char *)s2;
+**	while (n--)
+**		cs1[n] = cs2[n];
+**	return (s1);
+**}
+*/
 
 static inline void	longword(unsigned char **cs1, const unsigned char **cs2,
 						size_t *restrict n)
@@ -46,7 +66,7 @@ void	*ft_memmove(void *s1, const void *s2, size_t n)
 
 	if (s1 <= s2)
 		return (ft_memcpy(s1, s2, n));
-	if (!n || (!s1 && !s2))
+	else if (!n || (!s1 && !s2))
 		return (s1);
 	cs1 = (unsigned char *)s1 + n - 1;
 	cs2 = (const unsigned char *)s2 + n - 1;

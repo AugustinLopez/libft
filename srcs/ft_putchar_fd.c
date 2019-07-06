@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:46:54 by aulopez           #+#    #+#             */
-/*   Updated: 2019/04/12 13:18:38 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 11:58:17 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,25 @@
 ** https://www.utf8-chartable.de/unicode-utf8-table.pl
 */
 
-void	ft_putchar_fd(char c, int fd)
+static inline void	unicode(char c, int fd)
 {
-	int		i[2];
-	int		ret;
+	unsigned char	s[2];
 
-	if (c >= 0)
-		ret = write(fd, &c, 1);
-	else if (c < 0)
+	s[1] = c;
+	if (s[1] < 0xc0)
+		s[0] = 0xc2;
+	else
 	{
-		i[1] = 0xFF + 1 + c;
-		if (i[1] < 0xC0)
-			i[0] = 0xC2;
-		else
-		{
-			i[1] -= 0x40;
-			i[0] = 0xC3;
-		}
-		ret = write(fd, i, 2);
+		s[1] -= 0x40;
+		s[0] = 0xc3;
 	}
-	(void)ret;
+	 write(fd, s, 2);
+}
+
+void				ft_putchar_fd(char c, int fd)
+{
+	if (c >= 0)
+		write(fd, &c, 1);
+	else
+		unicode(c, fd);
 }

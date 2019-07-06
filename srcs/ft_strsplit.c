@@ -3,89 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:25:07 by aulopez           #+#    #+#             */
-/*   Updated: 2019/04/10 16:06:17 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 11:40:17 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static size_t	null_prot_nbr_word(const char *s, char c)
-{
-	size_t	occurence;
-
-	if (!s)
-		return (0);
-	if (!*s)
-		return (0);
-	occurence = 1;
-	while (*++s)
-		if (*s != c && *(s - 1) == c)
-			occurence++;
-	return (occurence);
-}
-
-static void		start_and_end(const char *s, char c, size_t *start, size_t *end)
-{
-	*start = *end;
-	while (s[*start])
-	{
-		if (s[*start] == c)
-			*start += 1;
-		else
-		{
-			*end = *start;
-			while (s[*end] && s[*end] != c)
-				*end += 1;
-			return ;
-		}
-	}
-}
-
-static char		*ft_strunchr(const char *s, int c)
+static inline char		*trim_start(const char *s, int c)
 {
 	if (*s != c)
 		return ((char*)s);
 	while (*(s++))
 		if (*s != c)
 			return ((char*)s);
-	return (0);
+	return (NULL);
 }
 
-static char		**ft_desalloc(char ***p, size_t i)
+static inline char		**free_all(char ***ppc, size_t i)
 {
 	while (--i)
-		free(*p[i]);
-	free(*p[0]);
-	free(*p);
-	return (*p);
+		free(*ppc[i]);
+	free(*ppc[0]);
+	free(*ppc);
+	return (NULL);
 }
 
-char			**ft_strsplit(char const *s, char c)
+static inline size_t	nbr_word(const char *s, char c)
 {
-	size_t	len;
-	size_t	se[2];
-	size_t	i;
-	char	**p;
+	size_t	word;
 
-	if (!s || !c)
+	if (!*s)
 		return (0);
-	s = ft_strunchr(s, c);
-	len = null_prot_nbr_word(s, c);
-	if (!(p = (char**)malloc((len + 1) * sizeof(*p))))
-		return (0);
-	se[0] = 0;
-	se[1] = 0;
-	i = 0;
-	while (i < len)
+	word = 1;
+	while (*++s)
+		if (*s != c && *(s - 1) == c)
+			++word;
+	return (word);
+}
+
+static inline void		find_word(const char *s, char c,
+							size_t *start, size_t *end)
+{
+	*start = *end;
+	while (s[*start])
 	{
-		start_and_end(s, c, &se[0], &se[1]);
-		if (!(p[i++] = ft_strsub(s, (unsigned int)se[0], se[1] - se[0])))
-			return (ft_desalloc(&p, i));
+		if (s[*start] == c)
+			++*start;
+		else
+		{
+			*end = *start;
+			while (s[*end] && s[*end] != c)
+				++*end;
+			return ;
+		}
 	}
-	p[i] = 0;
-	return (p);
+}
+
+char					**ft_strsplit(char const *s, char c)
+{
+	size_t	n;
+	size_t	start;
+	size_t	end;
+	size_t	i;
+	char	**ppc;
+
+	if (!c || !(s = trim_start(s, c)))
+		return (NULL);
+	n = nbr_word(s, c);
+	if (!(ppc = (char**)malloc((n + 1) * sizeof(*ppc))))
+		return (0);
+	start = 0;
+	end = 0;
+	i = 0;
+	while (i < n)
+	{
+		find_word(s, c, &start, &end);
+		if (!(ppc[i++] = ft_strsub(s, (unsigned int)start, end - start)))
+			return (free_all(&ppc, i));
+	}
+	ppc[n] = 0;
+	return (ppc);
 }
