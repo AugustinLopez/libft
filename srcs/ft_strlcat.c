@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 16:10:13 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 10:02:43 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 13:41:04 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ size_t	ft_strlcat(char *s1, const char *s2, size_t size)
 	{
 		k = j < size - i - 1 ? j : size - i - 1;
 		ft_memccpy(s1 + i, s2, 0, k);
-		if (k == j)
-			s1[i + k] = 0;
+		s1[i + k] = 0;
 	}
 	return (i + j);
 }

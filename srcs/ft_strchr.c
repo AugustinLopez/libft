@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 10:04:46 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 13:45:10 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static inline char	*basic_strchr(char *s, char c)
 	while (*(++s))
 		if (*s == c)
 			return (s);
+	if (!c)
+		return (s);
 	return (NULL);
 }
 
@@ -66,8 +68,6 @@ static inline char *longword(char *restrict s, char c)
 
 char	*ft_strchr(const char *s, int c)
 {
-	if (!*s)
-		return (NULL);
 	while ((uintptr_t)s & 0x7)
 	{
 		if (*s == (char)c)

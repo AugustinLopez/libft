@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:44:16 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 10:29:19 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/06 14:02:08 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ static inline int	align_address(const unsigned char **c1,
 	{
 		if (**c1 != **c2 || !**c1)
 			return (1);
-		if (!*n)
+		if (!*--n)
 			return (0);
 		++*c1;
 		++*c2;
-		--*n;
 	}
 	return (0);
 }
@@ -61,12 +60,12 @@ static inline void	loopword(const unsigned char **c1,
 	while (1)
 	{
 		if ((*ll1 != *ll2)
-				|| (((*ll1 - one_each_byte) & ~*ll1) & (one_each_byte << 7))
-				|| !*n)
+				|| (((*ll1 - one_each_byte) & ~*ll1) & (one_each_byte << 7)))
+			break ;
+		if (!(*n -= 8))
 			break ;
 		++ll1;
 		++ll2;
-		*n -= 8;
 	}
 	*c1 = (const unsigned char *)ll1;
 	*c2 = (const unsigned char *)ll2;
@@ -89,7 +88,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	while (*cs1 == *cs2)
 	{
-		if (!n--)
+		if (!--n)
 			return (0);
 		else if (!*cs1)
 			break ;
