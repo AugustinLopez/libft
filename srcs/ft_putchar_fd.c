@@ -16,7 +16,7 @@
 ** https://www.utf8-chartable.de/unicode-utf8-table.pl
 */
 
-static inline void	unicode(char c, int fd)
+static inline int	unicode(char c, int fd)
 {
 	unsigned char	s[2];
 
@@ -28,13 +28,16 @@ static inline void	unicode(char c, int fd)
 		s[1] -= 0x40;
 		s[0] = 0xc3;
 	}
-	 write(fd, s, 2);
+	return (write(fd, s, 2));
 }
 
 void				ft_putchar_fd(char c, int fd)
 {
+	int	ret;
+
 	if (c >= 0)
-		write(fd, &c, 1);
+		ret = write(fd, &c, 1);
 	else
-		unicode(c, fd);
+		ret = unicode(c, fd);
+	(void)ret;
 }

@@ -16,12 +16,11 @@
 # include <stdlib.h>
 # include <libft.h>
 
-size_t	memcpy_speed_test(int len, int second,
-							void *(mem)(void *, const void *, size_t))
+size_t	memcpy_speed_test(int len, int second, void *(mem)(void *, const void *, size_t))
 {
-	clock_t			chrono;
-	clock_t			start;
-	size_t			i;
+	clock_t			chrono = 0;
+	clock_t			start = 0;
+	size_t			i = 0;
 	void			*dst;
 	void			*src1;
 	void			*src2;
@@ -31,8 +30,6 @@ size_t	memcpy_speed_test(int len, int second,
 	src2 = malloc(len);
 	if (!dst || !src1 || !src2)
 		exit(1);
-	chrono = 0;
-	i = 0;
 	memset(src1, 0xff, len);
 	memset(src2, 0, len);
 	memset(dst, 0, len);

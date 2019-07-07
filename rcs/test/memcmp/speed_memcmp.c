@@ -11,18 +11,16 @@
 /* ************************************************************************** */
 
 # include <stdio.h>
+# include <libft.h>
 # include <time.h>
 # include <string.h>
 # include <stdlib.h>
-# include <libft.h>
 
-size_t	memcmp_speed_test(int len, int second,
-							int (mem)(const void *, const void *, size_t))
+size_t	memcmp_speed_test(int len, int second, int (mem)(const void *, const void *, size_t))
 {
-	clock_t			chrono;
-	clock_t			start;
-	unsigned char	chr;
-	size_t			i;
+	clock_t			chrono = 0;
+	clock_t			start = 0;
+	size_t			i = 0;
 	void			*src;
 	void			*dst;
 
@@ -30,9 +28,6 @@ size_t	memcmp_speed_test(int len, int second,
 	dst = malloc(len + 1);
 	if (!dst || !src)
 		exit(1);
-	chrono = 0;
-	chr = 0;
-	i = 0;
 	memset(src, 0xff, len + 1);
 	memset(dst, 0xff, len + 1);
 	((char *)src)[len] = 0;

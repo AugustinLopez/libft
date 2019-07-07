@@ -13,6 +13,26 @@
 #include <stdint.h>
 #include <string.h>
 
+/*
+** Basic implementation
+*/
+
+/*
+**void	*ft_memchr(const void *s, int c, size_t n)
+**{
+**	const unsigned char	*pc;
+**
+**	pc = (const unsigned char *)s;
+**	while (n--)
+**	{
+**if (*pc == (unsigned char)c)
+**			return ((void *)pc);
+**		++pc;
+**	}
+**	return (NULL);
+**}
+*/
+
 static inline const unsigned char	*loopword(const unsigned char *restrict pc,
 										const unsigned char c,
 										size_t *restrict n)
@@ -61,23 +81,3 @@ void						*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-/*
-** Basic implementation
-*/
-
-/*
-**void	*ft_memchr(const void *s, int c, size_t n)
-**{
-**	const unsigned char	*pc;
-**
-**	pc = (const unsigned char *)s;
-**	while (n--)
-**	{
-**if (*pc == (unsigned char)c)
-**			return ((void *)pc);
-**		++pc;
-**	}
-**	return (NULL);
-**}
-*/

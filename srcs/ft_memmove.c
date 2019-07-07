@@ -23,8 +23,10 @@
 **	unsigned char		*cs1;
 **	const unsigned char	*cs2;
 **
-**	if (s1 <= s2)
+**	if (s1 < s2)
 **		return (ft_memcpy(s1, s2, n));
+**	if (!n || (s1 == s2))
+**		return (s1);
 **	cs1 = (unsigned char *)s1;
 **	cs2 = (const unsigned char *)s2;
 **	while (n--)
@@ -64,9 +66,9 @@ void	*ft_memmove(void *s1, const void *s2, size_t n)
 	unsigned char		*cs1;
 	const unsigned char	*cs2;
 
-	if (s1 <= s2)
+	if (s1 < s2)
 		return (ft_memcpy(s1, s2, n));
-	else if (!n || (!s1 && !s2))
+	else if (!n || (s1 == s2))
 		return (s1);
 	cs1 = (unsigned char *)s1 + n - 1;
 	cs2 = (const unsigned char *)s2 + n - 1;

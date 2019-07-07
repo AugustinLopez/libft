@@ -12,6 +12,7 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <string.h>
 # include <stdint.h>
 
@@ -79,6 +80,20 @@ typedef struct		s_list
 # define FT_BLCYAN		"\033[106m"
 
 /*
+** --- Raw Memory Functions ----------------------------------------------------
+*/
+
+void				*ft_memset(void *s, int c, size_t n);
+void				ft_bzero(void *s, size_t n);
+void				*ft_memcpy(void *s1, const void *s2, size_t n);
+void				*ft_memccpy(void *s1, const void *s2, int c, size_t n);
+void				*ft_memmove(void *s1, const void *s2, size_t len);
+void				*ft_memchr(const void *s, int c, size_t n);
+int					ft_memcmp(const void *s1, const void *s2, size_t n);
+void				ft_memdel(void **ap);
+void				*ft_memalloc(size_t size);
+
+/*
 ** --- Print/Put Functions -----------------------------------------------------
 */
 
@@ -94,20 +109,6 @@ int					ft_printf(const char *format, ...);
 int					ft_dprintf(int fd, const char *format, ...);
 char				*ft_sprintf(const char *format, ...);
 int					ft_nprintf(const char *format, ...);
-
-/*
-** --- Raw Memory Functions ----------------------------------------------------
-*/
-
-void				*ft_memset(void *s, int c, size_t n);
-void				ft_bzero(void *s, size_t n);
-void				*ft_memcpy(void *dst, const void *src, size_t n);
-void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
-void				*ft_memchr(const void *s, int c, size_t n);
-void				*ft_memmove(void *dst, const void *src, size_t len);
-void				ft_memdel(void **ap);
-void				*ft_memalloc(size_t size);
-int					ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /*
 ** --- Singly Linked List Functions --------------------------------------------

@@ -11,23 +11,20 @@
 /* ************************************************************************** */
 
 # include <stdio.h>
+# include <libft.h>
 # include <time.h>
 # include <string.h>
 # include <stdlib.h>
-# include <libft.h>
 
-size_t	memchr_speed_test(int len, int second,
-						void *(mem)(const void *, int, size_t))
+size_t	memchr_speed_test(int len, int second, void *(mem)(const void *, int, size_t))
 {
-	clock_t			chrono;
-	clock_t			start;
-	size_t			i;
+	clock_t			chrono = 0;
+	clock_t			start = 0;
+	size_t			i = 0;
 	void			*buff;
 
 	if (!(buff = malloc(len + 1)))
 		exit(1);
-	chrono = 0;
-	i = 0;
 	memset(buff, 0, len + 1);
 	((char *)buff)[len] = 1;
 	start = clock();

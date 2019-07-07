@@ -11,36 +11,30 @@
 /* ************************************************************************** */
 
 # include <stdio.h>
+# include <libft.h>
 # include <time.h>
 # include <string.h>
 # include <stdlib.h>
-# include <libft.h>
 
-size_t	memccpy_speed_test(int len, int second, char *dst, char *src1,
-							char *src2, void *(mem)(void *, const void *, int, size_t))
+size_t	memccpy_speed_test(int len, int second, void *(mem)(void *, const void *, int, size_t))
 {
-	clock_t			chrono;
-	clock_t			start;
-	unsigned char	chr;
-	size_t			i;
-	void			*dst;
-	void			*src1;
-	void			*src2;
-
+	clock_t	chrono = 0;
+	clock_t	start = 0;
+	size_t	i = 0;
+	void	*dst;
+	void	*src1;
+	void	*src2;
 
 	dst = malloc(len + 1);
 	src1 = malloc(len + 1);
 	src2 = malloc(len + 1);
 	if (!dst || !src1 || !src2)
 		exit(1);
-	chrono = 0;
-	chr = 0;
-	i = 0;
 	memset(src1, 0xff, len + 1);
 	memset(src2, 0, len + 1);
 	memset(dst, 0, len + 1);
-	src1[len] = 0;
-	src2[len] = 0xff;
+	((char *)src1)[len] = 0;
+	((char *)src2)[len] = 0xff;
 	start = clock();
 	while (chrono < second * CLOCKS_PER_SEC)
 	{

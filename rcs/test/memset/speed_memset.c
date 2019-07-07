@@ -11,25 +11,22 @@
 /* ************************************************************************** */
 
 # include <stdio.h>
+# include <libft.h>
 # include <time.h>
 # include <string.h>
 # include <stdlib.h>
-# include <libft.h>
 
 size_t	memset_speed_test(int len, int second,
 						void *(mem)(void *, int, size_t))
 {
-	clock_t			chrono;
-	clock_t			start;
-	unsigned char	chr;
-	size_t			i;
+	unsigned char	chr = 0;
+	clock_t			chrono = 0;
+	clock_t			start = 0;
+	size_t			i = 0;
 	void			*buff;
 
 	if (!(buff = malloc(len)))
 		exit(1);
-	chrono = 0;
-	chr = 0;
-	i = 0;
 	memset(buff, 0, len);
 	start = clock();
 	while (chrono < second * CLOCKS_PER_SEC)
