@@ -38,12 +38,13 @@ Symbol | Meaning
 - :white_large_square::white_circle:	[ft_memset]( https://github.com/AugustinLopez/libft/wiki/memset )
 - :white_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
 - :white_large_square::white_circle:	[ft_memcpy]( https://github.com/AugustinLopez/libft/wiki/memcpy )
-- :white_large_square::white_circle:	void	\*ft_memccpy(void \*dst, const void \*src, int c, size_t n);
-- :white_large_square::white_circle:	void	\*ft_memmove(void \*dst, const void \*src, size_t len);
-- :white_large_square::white_circle:	void	\*ft_memchr(const void \*s, int c, size_t n);
+- :white_large_square::white_circle:	[ft_memccpy]( https://github.com/AugustinLopez/libft/wiki/memccpy )
+- :white_large_square::white_circle:	[ft_memmove]( https://github.com/AugustinLopez/libft/wiki/memmove )
+- :white_large_square::white_circle:	[ft_memchr]( https://github.com/AugustinLopez/libft/wiki/memchr )
+- :white_large_square::white_circle:	[ft_memcmp]( https://github.com/AugustinLopez/libft/wiki/memcmp )
 - :black_large_square::white_circle:	[ft_memdel]( https://github.com/AugustinLopez/libft/wiki/memdel )
 - :black_large_square::white_circle:	void	\*ft_memalloc(size_t size);
-- :black_large_square::white_circle:	int		ft_memcmp(const void \*s1, const void \*s2, size_t n); 
+
 
 ### Singly Linked List Functions
 - :black_large_square::white_circle:	t_list	\*ft_lstnew(void const \*content, size_t content_size); 
