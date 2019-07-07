@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 09:37:16 by aulopez           #+#    #+#             */
-/*   Updated: 2019/06/30 09:37:16 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/07 17:10:10 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@
 # include <stdlib.h>
 # include <libft.h>
 
-void	memset_speed_test(int len, int second, char *buff,
+size_t	memset_speed_test(int len, int second,
 						void *(mem)(void *, int, size_t))
 {
 	clock_t			chrono;
 	clock_t			start;
 	unsigned char	chr;
 	size_t			i;
+	void			*buff;
 
+	if (!(buff = malloc(len)))
+		exit(1);
 	chrono = 0;
 	chr = 0;
 	i = 0;
-	mem(buff, chr, len);
+	memset(buff, 0, len);
 	start = clock();
 	while (chrono < second * CLOCKS_PER_SEC)
 	{
@@ -35,21 +38,20 @@ void	memset_speed_test(int len, int second, char *buff,
 		i++;
 		chrono = clock() - start;
 	}
-	printf("%zu\n", i);
+	free(buff);
+	return (i);
 }
 
 int	main(int ac, char **av)
 {
 	int		size;
-	char	*buff;
+	size_t	n;
+	size_t	d;
 
-	if (ac < 2 || !(buff = (char *)malloc(sizeof(*buff) * (1000000 + 1))))
-		return (0);
 	size = atoi(av[1]);
-	printf("ft_memset: ");
-	memset_speed_test(size, 5, buff, *ft_memset);
-	printf("   memset: ");
-	memset_speed_test(size, 5, buff, *memset);
-	free(buff);
+	printf("%-7d: ", size);
+	n = memset_speed_test(size, 5, *ft_memset);
+	d = memset_speed_test(size, 5, *memset);
+	printf("%.f%%\n", (n + 0.0) / (d + 0.0) * 100);
 	return (0);
 }

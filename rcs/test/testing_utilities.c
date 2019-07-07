@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:09:30 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/03 13:09:30 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/07 16:11:21 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	crash_expected(int signo)
 
 int		setup(int ac, char **av)
 {
-	if (ac < 2 || !av[1][0])
+	if (ac < 4 || !av[1][0] || !av[2][0] || !av[3][0])
 		return (0);
 	signal(SIGBUS, crash_unexpected);
 	signal(SIGSEGV, crash_unexpected);

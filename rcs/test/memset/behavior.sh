@@ -1,20 +1,23 @@
 make -C ../../../
 gcc behavior_memset.c ../testing_utilities.c -I../ ../../../libft.a -I../../../includes -o behavior
-printf 'GENERAL -        '
-./behavior 0 $1
-printf '\nLIMITED MEMORY - '
-./behavior 1 $1
-printf 'System result is '
-./behavior 2 $1
-printf '\nNULL,X,0 -       '
-./behavior 3 $1
-printf 'System result is '
-./behavior 4 $1
-printf '\nNULL,X,1 -       '
-./behavior 5 $1
-printf 'System result is '
-./behavior 6 $1
-printf '\nUNAUTHORIZED -   '
-./behavior 7 $1
-printf 'System result is '
-./behavior 8 $1
+./behavior 0 1 0
+./behavior 0 0 0
+printf '\n'
+./behavior 1 1 0
+./behavior 1 0 0
+printf '\n'
+./behavior 2 1 0
+./behavior 2 0 0
+printf '\n'
+./behavior 3 1 0
+./behavior 3 0 0
+printf '\n'
+./behavior 3 1 1
+./behavior 3 0 1
+printf '\n'
+./behavior 3 1 2
+./behavior 3 0 2
+printf '\n'
+./behavior 3 1 3
+./behavior 3 0 3
+rm ./behavior

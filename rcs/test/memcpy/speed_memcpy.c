@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 09:37:16 by aulopez           #+#    #+#             */
-/*   Updated: 2019/06/30 23:09:11 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/07 17:18:32 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,22 @@
 # include <stdlib.h>
 # include <libft.h>
 
-void	memcpy_speed_test(int len, int second, char *dst, char *src1,
-							char *src2, void *(mem)(void *, const void *, size_t))
+size_t	memcpy_speed_test(int len, int second,
+							void *(mem)(void *, const void *, size_t))
 {
 	clock_t			chrono;
 	clock_t			start;
-	unsigned char	chr;
 	size_t			i;
+	void			*dst;
+	void			*src1;
+	void			*src2;
 
+	dst = malloc(len);
+	src1 = malloc(len);
+	src2 = malloc(len);
+	if (!dst || !src1 || !src2)
+		exit(1);
 	chrono = 0;
-	chr = 0;
 	i = 0;
 	memset(src1, 0xff, len);
 	memset(src2, 0, len);
@@ -40,31 +46,22 @@ void	memcpy_speed_test(int len, int second, char *dst, char *src1,
 		i++;
 		chrono = clock() - start;
 	}
-	printf("%zu\n", i);
+	free(dst);
+	free(src1);
+	free(src2);
+	return (i);
 }
 
 int	main(int ac, char **av)
 {
 	int		size;
-	char	*buff;
-	char	*src1;
-	char	*src2;
+	size_t	d;
+	size_t	n;
 
-	if (ac < 2)
-		return (0);
-	buff = (char *)malloc(sizeof(*buff) * (1000000 + 1));
-	src1 = (char *)malloc(sizeof(*buff) * (1000000 + 7));
-	src2 = (char *)malloc(sizeof(*buff) * (1000000 + 7));
-	if (buff && src1 && src2)
-	{
-		size = atoi(av[1]);
-		printf("ft_memcpy: ");
-		memcpy_speed_test(size, 5, buff, src1, src2, *ft_memcpy);
-		printf("   memcpy: ");
-		memcpy_speed_test(size, 5, buff, src1, src2, *memcpy);
-	}
-	buff ? free(buff) : (void)0;
-	src1 ? free(src1) : (void)0;
-	src2 ? free(src2) : (void)0;
+	size = atoi(av[1]);
+	printf("%-7d: ", size);
+	n = memcpy_speed_test(size, 5, *ft_memcpy);
+	d = memcpy_speed_test(size, 5, *memcpy);
+	printf("%.f%%\n", (n + 0.0) / (d + 0.0) * 100);
 	return (0);
 }

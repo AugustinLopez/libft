@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 09:37:16 by aulopez           #+#    #+#             */
-/*   Updated: 2019/06/30 09:37:16 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/07 17:24:38 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,41 @@
 # include <stdlib.h>
 # include <libft.h>
 
-void	memchr_speed_test(int len, int second, char *buff,
+size_t	memchr_speed_test(int len, int second,
 						void *(mem)(const void *, int, size_t))
 {
 	clock_t			chrono;
 	clock_t			start;
 	size_t			i;
+	void			*buff;
 
+	if (!(buff = malloc(len + 1)))
+		exit(1);
 	chrono = 0;
 	i = 0;
-	memset(buff, 0, len);
-	buff[len - 1] = 1;
+	memset(buff, 0, len + 1);
+	((char *)buff)[len] = 1;
 	start = clock();
 	while (chrono < second * CLOCKS_PER_SEC)
 	{
-		mem(buff, 1, len);
+		mem(buff, 1, len + 1);
 		i++;
 		chrono = clock() - start;
 	}
-	printf("%zu\n", i);
+	free(buff);
+	return (i);
 }
 
 int	main(int ac, char **av)
 {
 	int		size;
-	char	*buff;
+	size_t	d;
+	size_t	n;
 
-	if (ac < 2 || !(buff = (char *)malloc(sizeof(*buff) * (1000000 + 1))))
-		return (0);
 	size = atoi(av[1]);
-	printf("ft_memchr: ");
-	memchr_speed_test(size, 5, buff, *ft_memchr);
-	printf("   memchr: ");
-	memchr_speed_test(size, 5, buff, *memchr);
-	free(buff);
+	printf("%-7d: ", size);
+	n = memchr_speed_test(size, 5, *ft_memchr);
+	d = memchr_speed_test(size, 5, *memchr);
+	printf("%.f%%\n", (n + 0.0) / (d + 0.0) * 100);
 	return (0);
 }
