@@ -1,6 +1,6 @@
 # libft
 
-The **libft** library is the first real project from the [42](https://www.42.fr) curriculum. While a 42 student rarely has access to external libraries, the use of our libft is always authorized and encouraged.
+The **libft** library is the first project from the [42](https://www.42.fr) curriculum. While a 42 student rarely has access to external libraries, the use of our libft is always authorized and encouraged.
 
 ## Useful links
 - The [libft PDF subject](https://github.com/AugustinLopez/libft/blob/master/rcs/libft.pdf)
