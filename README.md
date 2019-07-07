@@ -36,7 +36,7 @@ Symbol | Meaning
 
 ### Raw Memory Functions
 - :white_large_square::white_circle:	[ft_memset]( https://github.com/AugustinLopez/libft/wiki/memset )
-- :white_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
+- :black_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
 - :white_large_square::white_circle:	[ft_memcpy]( https://github.com/AugustinLopez/libft/wiki/memcpy )
 - :white_large_square::white_circle:	[ft_memccpy]( https://github.com/AugustinLopez/libft/wiki/memccpy )
 - :white_large_square::white_circle:	[ft_memmove]( https://github.com/AugustinLopez/libft/wiki/memmove )
