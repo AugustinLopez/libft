@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:44:16 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 14:02:08 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:20:46 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static inline int	align_address(const unsigned char **c1,
 	}
 	return (0);
 }
+
 static inline void	loopword(const unsigned char **c1,
 						const unsigned char **c2, size_t *restrict n)
 {

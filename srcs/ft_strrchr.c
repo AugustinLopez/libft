@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 14:18:38 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:21:00 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 /*
 ** Basic implementation
 */
-
 
 char	*ft_strrchr(const char *s, int c)
 {

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 10:29:13 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 09:33:24 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:21:52 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static inline size_t	loopword(const char *restrict s, size_t n)
 	return (0);
 }
 
-size_t	ft_strlen(const char *s)
+size_t					ft_strlen(const char *s)
 {
 	size_t	n;
 

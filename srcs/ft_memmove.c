@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 11:33:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 09:24:59 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:23:01 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static inline void	longword(unsigned char **cs1, const unsigned char **cs2,
 	}
 }
 
-void	*ft_memmove(void *s1, const void *s2, size_t n)
+void				*ft_memmove(void *s1, const void *s2, size_t n)
 {
 	unsigned char		*cs1;
 	const unsigned char	*cs2;
