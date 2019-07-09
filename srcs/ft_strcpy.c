@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:00:28 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:22:20 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/09 10:39:14 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ static inline void	loopword(char **restrict cs1, const char **restrict cs2)
 	uint64_t	*ll1;
 	uint64_t	*ll2;
 	uint64_t	one_each_byte;
+	uint64_t	catching_mask;
 
 	ll1 = (uint64_t *)*cs1;
 	ll2 = (uint64_t *)*cs2;
 	one_each_byte = 0x0101010101010101L;
+	catching_mask = one_each_byte << 7;
 	while (1)
 	{
-		if (((*ll2 - one_each_byte) & ~*ll2) & (one_each_byte << 7))
+		if (((*ll2 - one_each_byte) & ~*ll2) & catching_mask)
 			break ;
 		*ll1++ = *ll2++;
 	}

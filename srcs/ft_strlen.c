@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 10:29:13 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:21:52 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/09 10:30:52 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ static inline size_t	loopword(const char *restrict s, size_t n)
 {
 	const uint64_t	*pll;
 	uint64_t		one_each_byte;
+	uint64_t		catching_mask;
 	size_t			len;
 
 	len = n;
 	pll = (const uint64_t *)s;
 	one_each_byte = 0x0101010101010101L;
+	catching_mask = one_each_byte << 7;
 	while (1)
 	{
-		if (((*pll - one_each_byte) & ~*pll) & (one_each_byte << 7))
+		if (((*pll - one_each_byte) & ~*pll) & catching_mask)
 			break ;
 		++pll;
 		len += 8;

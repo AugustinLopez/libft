@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:25:56 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/09 10:33:10 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ static inline char	*longword(char *restrict s, char c)
 	const uint64_t	*pll;
 	uint64_t		one_each_byte;
 	uint64_t		c_each_byte;
+	uint64_t		catching_mask;
 	uint64_t		loopword;
 
 	pll = (const uint64_t *)s;
 	one_each_byte = 0x0101010101010101L;
+	catching_mask = one_each_byte << 7;
 	c_each_byte = c | (c << 8);
 	c_each_byte |= c_each_byte << 16;
 	c_each_byte |= c_each_byte << 32;
