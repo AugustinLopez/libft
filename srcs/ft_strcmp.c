@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 10:07:22 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/09 10:39:48 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:26:02 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@
 **}
 */
 
-static inline int	align_loop(const unsigned char **c1,
+static inline int	loopword(const unsigned char **c1,
 						const unsigned char **c2)
 {
+	const uint64_t	*ll1;
+	const uint64_t	*ll2;
+	uint64_t		one_each_byte;
+
 	while ((uintptr_t)*c1 & 0x7)
 	{
 		if (**c1 != **c2 || !**c1)
@@ -39,26 +43,13 @@ static inline int	align_loop(const unsigned char **c1,
 		++*c1;
 		++*c2;
 	}
-	return (0);
-}
-static inline int	loopword(const unsigned char **c1,
-						const unsigned char **c2)
-{
-	const uint64_t	*ll1;
-	const uint64_t	*ll2;
-	uint64_t		one_each_byte;
-	uint64_t		catching_mask;
-
-	if (align_loop(c1, c2))
-		return (1);
 	one_each_byte = 0x0101010101010101L;
-	catching_mask = one_each_byte << 7;
 	ll1 = (const uint64_t *)*c1;
 	ll2 = (const uint64_t *)*c2;
 	while (1)
 	{
 		if ((*ll1 != *ll2)
-			|| (((*ll1 - one_each_byte) & ~*ll1) & catching_mask))
+				|| (((*ll1 - one_each_byte) & ~*ll1) & (one_each_byte << 7)))
 			break ;
 		++ll1;
 		++ll2;
