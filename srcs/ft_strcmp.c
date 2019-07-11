@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 10:07:22 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 10:19:16 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:26:02 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static inline int	loopword(const unsigned char **c1,
 	return (0);
 }
 
-int		ft_strcmp(const char *s1, const char *s2)
+int					ft_strcmp(const char *s1, const char *s2)
 {
 	const unsigned char	*cs1;
 	const unsigned char	*cs2;

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 13:45:10 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:25:56 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static inline char	*basic_strchr(char *s, char c)
 	return (NULL);
 }
 
-static inline char *longword(char *restrict s, char c)
+static inline char	*longword(char *restrict s, char c)
 {
-	const uint64_t *pll;
+	const uint64_t	*pll;
 	uint64_t		one_each_byte;
 	uint64_t		c_each_byte;
 	uint64_t		loopword;
@@ -66,7 +66,7 @@ static inline char *longword(char *restrict s, char c)
 	return (s);
 }
 
-char	*ft_strchr(const char *s, int c)
+char				*ft_strchr(const char *s, int c)
 {
 	while ((uintptr_t)s & 0x7)
 	{
