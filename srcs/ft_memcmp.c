@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:04:50 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 09:27:12 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:23:22 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static inline int	loopword(const unsigned char **cs1,
 	while (*n >= 8)
 	{
 		if (*lls1 != *lls2)
-			break;
+			break ;
 		++lls1;
 		++lls2;
 		*n -= 8;

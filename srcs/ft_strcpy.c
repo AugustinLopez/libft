@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:00:28 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 13:23:47 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:22:20 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char				*ft_strcpy(char *restrict s1, const char *restrict s2)
 {
 	char		*cs1;
 	const char	*cs2;
-	
+
 	cs1 = s1;
 	cs2 = s2;
 	if ((((uintptr_t)s1 & 0x7) == ((uintptr_t)s2 & 0x7)))

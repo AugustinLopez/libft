@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:08:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 09:25:36 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:23:35 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static inline const unsigned char	*loopword(const unsigned char *restrict pc,
 	return ((const unsigned char *)pll);
 }
 
-void						*ft_memchr(const void *s, int c, size_t n)
+void								*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*pc;
 

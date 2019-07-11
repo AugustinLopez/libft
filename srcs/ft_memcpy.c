@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:04:50 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 09:20:06 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:22:51 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ static inline void	loopword(unsigned char **restrict cs1,
 		*((*cs1)++) = *((*cs2)++);
 		--(*n);
 	}
-		lls1 = (uint64_t *)*cs1;
-		lls2 = (uint64_t *)*cs2;
-		while (*n >= 8)
-		{
-			*lls1++ = *lls2++;
-			*n -= 8;
-		}
-		*cs1 = (unsigned char *)lls1;
-		*cs2 = (unsigned char *)lls2;
+	lls1 = (uint64_t *)*cs1;
+	lls2 = (uint64_t *)*cs2;
+	while (*n >= 8)
+	{
+		*lls1++ = *lls2++;
+		*n -= 8;
+	}
+	*cs1 = (unsigned char *)lls1;
+	*cs2 = (unsigned char *)lls2;
 }
 
 void				*ft_memcpy(void *restrict s1, const void *restrict s2,
