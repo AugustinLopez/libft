@@ -33,11 +33,9 @@ static inline char	*basic_strchr(char *s, char c)
 {
 	if (*s == c)
 		return (s);
-	while (*(++s))
+	while (*(s++))
 		if (*s == c)
 			return (s);
-	if (!c)
-		return (s);
 	return (NULL);
 }
 
@@ -72,7 +70,7 @@ char				*ft_strchr(const char *s, int c)
 	{
 		if (*s == (char)c)
 			return ((char *)s);
-		if (!*++s)
+		if (!*s++)
 			return (NULL);
 	}
 	s = (const char *)longword((char *)s, (char)c);
