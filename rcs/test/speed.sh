@@ -1,5 +1,5 @@
-make -C ../ $2 >> /dev/null
-gcc ./test/$1/speed_$1.c ../libft.a -I../includes -o speed
+make -C ../../ $2 >> /dev/null
+gcc ./$1/speed_$1.c ../../libft.a -I../../includes -o speed
 printf "$1:\n"
 ./speed 1
 ./speed 10

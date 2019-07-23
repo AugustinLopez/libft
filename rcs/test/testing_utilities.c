@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <testing.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -18,23 +19,46 @@
 
 void	crash_unexpected(int signo)
 {
-	write(1, "\033[31mUnexpected crash\033[39m : ", 29);
 	signal(signo, SIG_DFL);
+	signal(SIGSEGV, SIG_DFL);
+	signal(SIGBUS, SIG_DFL);
+	if (g_av[2][0] == '1')
+	{
+		write(1, &(g_av[1][0]), 1);
+		write(1, ": ", 2);
+	}
+	write(1, "\033[31mUnexpected crash\033[39m : ", 29);
+	if (g_av[2][0] == '1')
+		write(1, " <-- libft | syslib --> ", 24);
+	else
+		write(1, "\n", 1);
 	raise(signo);
 }
 
 void	crash_expected(int signo)
 {
+	signal(signo, SIG_DFL);
+	signal(SIGSEGV, SIG_DFL);
+	signal(SIGBUS, SIG_DFL);
+	if (g_av[2][0] == '1')
+	{
+		write(1, &(g_av[1][0]), 1);
+		write(1, ": ", 2);
+	}
 	if (signo == SIGSEGV)
-		write(1, "\033[33mSegfault\033[39m\n", 19);
+		write(1, "\033[33mSegfault\033[39m", 18);
 	else if (signo == SIGBUS)
-		write(1, "\033[33mBus error\033[39m\n", 20);
+		write(1, "\033[33mBus error\033[39m", 19);
+	if (g_av[2][0] == '1')
+		write(1, " <-- libft | syslib --> ", 24);
+	else
+		write(1, "\n", 1);
 	exit(EXIT_SUCCESS);
 }
 
 int		setup(int ac, char **av)
 {
-	if (ac < 4 || !av[1][0] || !av[2][0] || !av[3][0])
+	if (ac < 3 || !av[1][0] || !av[2][0])
 		return (0);
 	signal(SIGBUS, crash_unexpected);
 	signal(SIGSEGV, crash_unexpected);
@@ -49,16 +73,25 @@ int		setup(int ac, char **av)
 	return (1);
 }
 
-int		cleanup(int ret)
+int		cleanup(int ret, char **av)
 {
+	if (g_av[2][0] == '1')
+	{
+		write(1, &(g_av[1][0]), 1);
+		write(1, ": ", 2);
+	}
 	if (!ret)
-		write(1, "\033[32mSuccess\033[39m\n", 18);
+		write(1, "\033[32mSuccess \033[39m", 18);
 	else if (ret == -1)
-		write(1, "\033[33mInvalid\033[39m\n", 18);
+		write(1, "\033[33mInvalid \033[39m", 18);
 	else if (ret == 10)
-		write(1, "\033[33mNo crash\033[39m\n", 19);
+		write(1, "\033[33mNo crash\033[39m", 19);
 	else
-		write(1, "\033[31mFailure\033[39m\n", 18);
+		write(1, "\033[31mFailure \033[39m", 18);
+	if (av[2][0] == '1')
+		write(1, " <-- libft | syslib --> ", 24);
+	else
+		write(1, "\n", 1);
 	return (ret);
 }
 

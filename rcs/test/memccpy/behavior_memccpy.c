@@ -16,30 +16,31 @@
 #include <stdlib.h>
 #include <signal.h>
 
-static inline int	test_undefined(int option,
-						void *(*mem)(void *, const void *, int, size_t))
+static inline int	test_undefined(
+						void *(*mem)(void *, const void *, int, size_t),
+						int option)
 {
 	signal(SIGSEGV, crash_expected);
 	signal(SIGBUS, crash_expected);
-	if (option == 0)
+	if (option == '5')
 		mem("", "1", 10, 1);
-	if (option == 1)
+	if (option == '6')
 		mem(NULL, NULL, 10, 1);
-	if (option == 2)
+	if (option == '7')
 		mem(NULL, "1", 10, 1);
-	if (option == 3)
+	if (option == '8')
 		mem("1", NULL, 10, 1);
-	if (option == 4)
+	if (option == '9')
 		mem(NULL, NULL, 10, 0);
-	if (option == 5)
+	if (option == 'a')
 		mem(NULL, "1", 10, 0);
-	if (option == 6)
+	if (option == 'b')
 		mem("1", NULL, 10, 0);
-	return (10);
+	return (NO_CRASH);
 }
 
-static inline int	test_memcpy_general(void *(*mem)
-						(void *, const void *, int, size_t))
+static inline int	test_memcpy_general(
+						void *(*mem)(void *, const void *, int, size_t))
 {
 	char	src[4096];
 	char	sys_dst[4096];
@@ -60,16 +61,16 @@ static inline int	test_memcpy_general(void *(*mem)
 		memccpy(sys_dst, src, 0, i);
 		pc = mem(lib_dst, src, 0, i);
 		if (memcmp(lib_dst, sys_dst, i))
-			return (1);
+			return (FAIL_1);
 		else if (pc)
-			return (2);
+			return (FAIL_2);
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }
 
-static inline int	test_memchr_size(void *(*mem)
-						(void *, const void *, int, size_t))
+static inline int	test_memchr_size(
+						void *(*mem)(void *, const void *, int, size_t))
 
 {
 	char	src[4097];
@@ -90,9 +91,9 @@ static inline int	test_memchr_size(void *(*mem)
 		if (!(pvs == NULL && pvl == NULL))
 		{
 			if (memcmp(pvs, pvl, 4096 - i))
-				return (1);
+				return (FAIL_1);
 			if (memcmp(lib_dst, sys_dst, 4096))
-				return (2);
+				return (FAIL_2);
 		}
 		if (i)
 			src[i - 1] = 1;
@@ -109,19 +110,19 @@ static inline int	test_memchr_size(void *(*mem)
 		if (!(pvs == NULL && pvl == NULL))
 		{
 			if (memcmp(pvs, pvl, 4096 - i))
-				return (3);
+				return (FAIL_3);
 			if (memcmp(lib_dst, sys_dst, 4096))
-				return (4);
+				return (FAIL_4);
 		}
 		if (i)
 			src[i - 1] = 0;
 		src[i++] = 1;
 	}
-	return (0);
+	return (SUCCESS);
 }
 
-static inline int	test_memchr_char(void *(*mem)
-						(void *, const void *, int, size_t))
+static inline int	test_memchr_char(
+						void *(*mem)(void *, const void *, int, size_t))
 {
 	char	src[10];
 	char	ldst[10];
@@ -137,16 +138,16 @@ static inline int	test_memchr_char(void *(*mem)
 	pvl = mem(ldst, src, 0, 5);
 	pvs = memccpy(sdst, src, 0, 5);
 	if (pvl || memcmp(ldst, sdst, 10))
-		return (1);
+		return (FAIL_1);
 	pvl = mem(ldst, src, 0, 10);
 	pvs = memccpy(sdst, src, 0, 10);
 	if (memcmp(pvl, pvs, 3) || memcmp(ldst, sdst, 10))
-		return (2);
+		return (FAIL_2);
 	src[8] = 0;
 	pvl = mem(ldst, src, 0, 10);
 	pvs = memccpy(sdst, src, 0, 10);
 	if (memcmp(pvl, pvs, 3) || memcmp(ldst, sdst, 10))
-		return (3);
+		return (FAIL_3);
 	memset(src, 0, 10);
 	i = 0;
 	while (i++ < 255)
@@ -157,32 +158,32 @@ static inline int	test_memchr_char(void *(*mem)
 		pvl = mem(ldst, src, i, 5);
 		pvs = memccpy(sdst, src, i, 5);
 		if (pvl || memcmp(ldst, sdst, 10))
-			return (1);
+			return (FAIL_1);
 		pvl = mem(ldst, src, i, 10);
 		pvs = memccpy(sdst, src, i, 10);
 		if (memcmp(pvl, pvs, 3) || memcmp(ldst, sdst, 10))
-			return (2);
+			return (FAIL_2);
 		src[8] = i;
 		pvl = mem(ldst, src, i, 10);
 		pvs = memccpy(sdst, src, i, 10);
 		if (memcmp(pvl, pvs, 3) || memcmp(ldst, sdst, 10))
-			return (3);
+			return (FAIL_3);
 		src[8] = 0;
 	}
-	return (0);
+	return (SUCCESS);
 }
 
-static inline int	test_memory(void *(*mem)
-						(void *, const void *, int, size_t))
+static inline int	test_memory(
+						void *(*mem)(void *, const void *, int, size_t))
 {
 	void	*dst;
 	void	*src;
 	size_t	i;
 
 	if (!(dst = protected_memory(4096)))
-		return (-1);
+		return (ERROR);
 	if (!(src = protected_memory(4096)))
-		return (-1);
+		return (ERROR);
 	memset(dst, 0, 4096);
 	i = 0;
 	while (i++ < 4096)
@@ -190,12 +191,12 @@ static inline int	test_memory(void *(*mem)
 	memset(dst, 0xff, 4096);
 	memset(src, 0xff, 4096);
 	if (!memcmp(dst, src, 4096))
-		return (0);
-	return (1);
+		return (SUCCESS);
+	return (FAILURE);
 }
 
-static inline int	test_misaligned(void *(*mem)
-						(void *, const void *, int, size_t))
+static inline int	test_misaligned(
+						void *(*mem)(void *, const void *, int, size_t))
 {
 	char	src[4097];
 	char	sys_dst[4097];
@@ -219,71 +220,37 @@ static inline int	test_misaligned(void *(*mem)
 		if (!(pvs == NULL && pvl == NULL))
 		{
 			if (memcmp(lib_dst, sys_dst, 4096))
-				return (1);
+				return (FAIL_1);
 			if (memcmp(pvl, pvs, 4096 - i))
-				return (2);
+				return (FAIL_2);
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 int					main(int ac, char **av)
 {
 	int		option;
 	int		ret;
+	void	*function;
 
+	g_av = av;
 	if (!setup(ac, av))
-	return (0);
+	return (ERROR);
 	option = av[1][0];
-	ret = 10;
+	function = (av[2][0] == '0') ? memccpy : ft_memccpy;
 	if (option == '0')
-		ret = test_memcpy_general(*ft_memccpy);
+		ret = test_memcpy_general(function);
 	else if (option == '1')
-		ret = test_memcpy_general(*memccpy);
+		ret = test_memchr_char(function);
 	else if (option == '2')
-		ret = test_memchr_char(*ft_memccpy);
+		ret = test_memchr_size(function);
 	else if (option == '3')
-		ret = test_memchr_char(*memccpy);
+		ret = test_memory(function);
 	else if (option == '4')
-		ret = test_memchr_size(*ft_memccpy);
-	else if (option == '5')
-		ret = test_memchr_size(*memccpy);
-	else if (option == '6')
-		ret = test_memory(*ft_memccpy);
-	else if (option == '7')
-		ret = test_memory(*memccpy);
-	else if (option == '8')
-		ret = test_misaligned(*ft_memccpy);
-	else if (option == '9')
-		ret = test_misaligned(*memccpy);
-	else if (option == 'a')
-		ret = test_undefined(0, *ft_memccpy);
-	else if (option == 'b')
-		ret = test_undefined(0, *memccpy);
-	else if (option == 'c')
-		ret = test_undefined(1, *ft_memccpy);
-	else if (option == 'd')
-		ret = test_undefined(1, *memccpy);
-	else if (option == 'e')
-		ret = test_undefined(2, *ft_memccpy);
-	else if (option == 'f')
-		ret = test_undefined(2, *memccpy);
-	else if (option == 'g')
-		ret = test_undefined(3, *ft_memccpy);
-	else if (option == 'h')
-		ret = test_undefined(3, *memccpy);
-	else if (option == 'i')
-		ret = test_undefined(4, *ft_memccpy);
-	else if (option == 'j')
-		ret = test_undefined(4, *memccpy);
-	else if (option == 'k')
-		ret = test_undefined(5, *ft_memccpy);
-	else if (option == 'l')
-		ret = test_undefined(5, *memccpy);
-	else if (option == 'm')
-		ret = test_undefined(6, *ft_memccpy);
-	else if (option == 'n')
-		ret = test_undefined(6, *memccpy);
-	return (cleanup(ret));
+		ret = test_misaligned(function);
+	else
+		ret = test_undefined(function, option);
+	return (cleanup(ret, av));
 }

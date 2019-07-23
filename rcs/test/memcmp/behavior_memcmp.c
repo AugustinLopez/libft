@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   behavior_memcpy.c                                  :+:      :+:    :+:   */
+/*   behavior_memcmp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,56 +16,62 @@
 #include <stdlib.h>
 #include <signal.h>
 
-static inline int	test_undefined(void *(*mem)(void *, const void *, size_t),
+static inline int	test_undefined(int (*mem)(void *, const void *, size_t),
 						int option)
 {
 	signal(SIGSEGV, crash_expected);
 	signal(SIGBUS, crash_expected);
-	if (option == '3')
-		mem("", "1", 1);
-	if (option == '4')
+	if (option == '2')
 		mem(NULL, NULL, 1);
-	if (option == '5')
+	if (option == '3')
 		mem(NULL, "1", 1);
-	if (option == '6')
+	if (option == '4')
 		mem("1", NULL, 1);
-	if (option == '7')
+	if (option == '5')
 		mem(NULL, NULL, 0);
-	if (option == '8')
+	if (option == '6')
 		mem(NULL, "1", 0);
-	if (option == '9')
+	if (option == '7')
 		mem("1", NULL, 0);
 	return (NO_CRASH);
 }
 
-static inline int	test_general(void *(*mem)(void *, const void *, size_t))
+static inline int	test_char(int (*mem)(const void *, const void *, size_t))
 {
-	char	src[4096];
-	char	sys_dst[4096];
-	char	lib_dst[4096];
-	void	*pc;
+	char	zero[20];
+	char	comp[10];
+	int		sys_ret;
+	int		lib_ret;
 	size_t	i;
 
 	i = 0;
-	pc = lib_dst;
+	memset(zero, 0, 20);
+	memset(comp, 0, 10);
 	while (i < 4096)
 	{
 		if (i)
-			memset(src + i - 1, (char)i, 1);
-		memset(sys_dst, 0, i);
-		memset(lib_dst, 0, i);
-		memcpy(sys_dst, src, i);
-		pc = mem(lib_dst, src, i);
-		if (memcmp(lib_dst, sys_dst, i))
+			comp[(i - 1) % 10] = 0;
+		comp[i % 10] = (char)i;
+		if ((unsigned char)i != mem(comp, zero + 5, 10))
 			return (FAIL_1);
-		else if (pc != lib_dst)
+		i++;
+	}
+	i = 0;
+	while (i < 256)
+	{
+		memset(comp, (unsigned char)i, 10);
+		memset(zero, (unsigned char)i, 20);
+		zero[5 + i % 10] = 0;
+		if ((unsigned char)i != mem(comp, zero + 5, 10))
 			return (FAIL_2);
 		i++;
 	}
+
 	return (SUCCESS);
 }
 
-static inline int	test_memory(void *(*mem)(void *, const void *, size_t))
+
+static inline int	test_memory(int *(*mem)(const void *, const void *, size_t))
 {
 	void	*dst;
 	void	*src;
@@ -83,33 +89,6 @@ static inline int	test_memory(void *(*mem)(void *, const void *, size_t))
 	return (FAIL_1);
 }
 
-static inline int	test_misaligned(void *(*mem)(void *, const void *, size_t))
-{
-	char	src[4096];
-	char	sys_dst[4096];
-	char	lib_dst[4096];
-	void	*pc;
-	size_t	i;
-
-	i = 0;
-	pc = lib_dst;
-	while (i < 4096)
-	{
-		if (i)
-			memset(src, (char)i, 4096);
-		memset(sys_dst, 0, i);
-		memset(lib_dst, 0, i);
-		memcpy(sys_dst + i, src, 4096 - i);
-		pc = mem(lib_dst + i, src, 4096 - i );
-		if (memcmp(lib_dst, sys_dst, 4096 - i))
-			return (FAIL_1);
-		else if (pc != lib_dst + i)
-			return (FAIL_2);
-		i++;
-	}
-	return (SUCCESS);
-}
-
 int					main(int ac, char **av)
 {
 	int		option;
@@ -120,13 +99,11 @@ int					main(int ac, char **av)
 	if (!setup(ac, av))
 		return (ERROR);
 	option = av[1][0];
-	function = (av[2][0] == '0') ? memcpy : ft_memcpy;
+	function = (av[2][0] == '0') ? memcmp : ft_memcmp;
 	if (option == '0')
-		ret = test_general(function);
+		ret = test_char(function);
 	else if (option == '1')
 		ret = test_memory(function);
-	else if (option == '2')
-		ret = test_misaligned(function);
 	else
 		ret = test_undefined(function, option);
 	return (cleanup(ret, av));
