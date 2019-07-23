@@ -36,14 +36,14 @@ Symbol | Meaning
 
 ### Raw Memory Functions
 - :white_large_square::white_circle:	[ft_memset]( https://github.com/AugustinLopez/libft/wiki/memset )
-- :black_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
 - :white_large_square::white_circle:	[ft_memcpy]( https://github.com/AugustinLopez/libft/wiki/memcpy )
 - :white_large_square::white_circle:	[ft_memccpy]( https://github.com/AugustinLopez/libft/wiki/memccpy )
 - :white_large_square::white_circle:	[ft_memmove]( https://github.com/AugustinLopez/libft/wiki/memmove )
 - :white_large_square::white_circle:	[ft_memchr]( https://github.com/AugustinLopez/libft/wiki/memchr )
 - :white_large_square::white_circle:	[ft_memcmp]( https://github.com/AugustinLopez/libft/wiki/memcmp )
+- :black_large_square::white_circle:	[ft_bzero]( https://github.com/AugustinLopez/libft/wiki/bzero )
 - :black_large_square::white_circle:	[ft_memdel]( https://github.com/AugustinLopez/libft/wiki/memdel )
-- :black_large_square::white_circle:	void	\*ft_memalloc(size_t size);
+- :black_large_square::white_circle:	[ft_memalloc]( https://github.com/AugustinLopez/libft/wiki/memalloc )
 
 
 ### Singly Linked List Functions
