@@ -74,9 +74,9 @@ Symbol | Meaning
 - :black_large_square::black_circle:	size_t	ft_atozu(const char \*src);
 
 ### String Search Functions
-- :white_large_square::white_circle:	char	\*ft_strchr(const char \*s, int c);
-- :white_large_square::white_circle:	int		ft_strcmp(const char \*s1, const char \*s2);
-- :white_large_square::white_circle:	int		ft_strncmp(const char \*s1, const char \*s2, size_t n);
+- :white_large_square::white_circle:	[ft_strchr]( https://github.com/AugustinLopez/libft/wiki/strchr )
+- :white_large_square::white_circle:	[ft_strcmp]( https://github.com/AugustinLopez/libft/wiki/strcmp )
+- :white_large_square::white_circle:	[ft_strncmp]( https://github.com/AugustinLopez/libft/wiki/strncmp )
 - :white_large_square::white_circle:	char	\*ft_strstr(const char \*haystack, const char \*needle);
 - :white_large_square::white_circle:	char	\*ft_strnstr(const char \*haystack, const char \*needle, size_t len);
 - :black_large_square::white_circle:	int		ft_strequ(char const \*s1, char const \*s2);
