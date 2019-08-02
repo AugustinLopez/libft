@@ -6,16 +6,13 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:44:16 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:20:46 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/02 16:37:14 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <string.h>
 #include <stdint.h>
-
-/*
-** Basic implementation
-*/
 
 /*
 **int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -53,18 +50,15 @@ static inline void	loopword(const unsigned char **c1,
 {
 	const uint64_t	*ll1;
 	const uint64_t	*ll2;
-	uint64_t		one_each_byte;
 
-	one_each_byte = 0x0101010101010101L;
 	ll1 = (const uint64_t *)*c1;
 	ll2 = (const uint64_t *)*c2;
-	while (1)
+	while (*n >= 8)
 	{
 		if ((*ll1 != *ll2)
-				|| (((*ll1 - one_each_byte) & ~*ll1) & (one_each_byte << 7)))
+				|| (((*ll1 - ONE_EACH_BYTE) & ~*ll1) & REV_EACH_BYTE))
 			break ;
-		if (!(*n -= 8))
-			break ;
+		*n -= 8;
 		++ll1;
 		++ll2;
 	}

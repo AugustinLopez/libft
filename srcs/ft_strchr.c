@@ -6,28 +6,26 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:25:56 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/01 20:39:37 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 #include <stdint.h>
-
-/*
-** Basic implementation
-*/
 
 /*
 **char	*ft_strchr(const char *s, int c)
 **{
 **	if (*s == c)
-**		return ((char*)s);
+**		return ((char *)s);
 **	while (*(s++))
 **		if (*s == c)
-**			return ((char*)s);
-**	return (0);
+**			return ((char *)s);
+**	return (NULL);
 **}
 */
+
 
 static inline char	*basic_strchr(char *s, char c)
 {
@@ -39,26 +37,24 @@ static inline char	*basic_strchr(char *s, char c)
 	return (NULL);
 }
 
-static inline char	*longword(char *restrict s, char c)
+static inline char	*loopword(char *restrict s, char c)
 {
 	const uint64_t	*pll;
-	uint64_t		one_each_byte;
 	uint64_t		c_each_byte;
-	uint64_t		loopword;
+	uint64_t		zero_mask;
 
 	pll = (const uint64_t *)s;
-	one_each_byte = 0x0101010101010101L;
 	c_each_byte = c | (c << 8);
 	c_each_byte |= c_each_byte << 16;
 	c_each_byte |= c_each_byte << 32;
 	while (1)
 	{
-		loopword = *pll ^ c_each_byte;
-		if (((loopword - one_each_byte) & ~loopword) & (one_each_byte << 7))
+		zero_mask = *pll ^ c_each_byte;
+		if (((zero_mask - ONE_EACH_BYTE) & ~zero_mask) & REV_EACH_BYTE)
 			break ;
-		else if (((*pll - one_each_byte) & ~*pll) & (one_each_byte << 7))
-			break ;
-		pll++;
+		else if (((*pll - ONE_EACH_BYTE) & ~*pll) & REV_EACH_BYTE)
+			return (NULL);
+		++pll;
 	}
 	s = (char *)pll;
 	return (s);
@@ -73,6 +69,7 @@ char				*ft_strchr(const char *s, int c)
 		if (!*s++)
 			return (NULL);
 	}
-	s = (const char *)longword((char *)s, (char)c);
+	if (!(s = (const char *)loopword((char *)s, (char)c)))
+		return (NULL);
 	return (basic_strchr((char *)s, (char)c));
 }

@@ -6,16 +6,12 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 10:07:22 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:26:02 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/02 15:09:33 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
 #include "libft.h"
-
-/*
-** Basic implementation
-*/
+#include <stdint.h>
 
 /*
 **int	ft_strcmp(const char *s1, const char *s2)
@@ -25,7 +21,7 @@
 **		++s1;
 **		++s2;
 **	}
-**	return (*(unsigned char*)s1 - *(unsigned char*)s2);
+**	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 **}
 */
 
@@ -34,7 +30,6 @@ static inline int	loopword(const unsigned char **c1,
 {
 	const uint64_t	*ll1;
 	const uint64_t	*ll2;
-	uint64_t		one_each_byte;
 
 	while ((uintptr_t)*c1 & 0x7)
 	{
@@ -43,13 +38,12 @@ static inline int	loopword(const unsigned char **c1,
 		++*c1;
 		++*c2;
 	}
-	one_each_byte = 0x0101010101010101L;
 	ll1 = (const uint64_t *)*c1;
 	ll2 = (const uint64_t *)*c2;
 	while (1)
 	{
 		if ((*ll1 != *ll2)
-				|| (((*ll1 - one_each_byte) & ~*ll1) & (one_each_byte << 7)))
+			|| (((*ll1 - ONE_EACH_BYTE) & ~*ll1) & REV_EACH_BYTE))
 			break ;
 		++ll1;
 		++ll2;

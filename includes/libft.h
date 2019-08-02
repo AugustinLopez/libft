@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:37:09 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/02 14:39:24 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/01 19:47:58 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct		s_list
 /*
 ** --- Color Macro -------------------------------------------------------------
 */
+
+# define ONE_EACH_BYTE	0x0101010101010101L
+# define REV_EACH_BYTE	0x8080808080808080L
 
 # define FT_EOC			"\033[0m"
 # define FT_BOLD		"\033[1m"
