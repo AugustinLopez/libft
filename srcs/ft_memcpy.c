@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:04:50 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:22:51 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 12:21:06 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 
 /*
-**void	*ft_memcpy(void *restrict s1, const void *restrict s2, size_t n)
+**void	*ft_memcpy(void *s1, const void *s2, size_t n)
 **{
 **	unsigned char	*cs1;
 **	unsigned char	*cs2;
@@ -31,9 +31,9 @@
 **}
 */
 
-static inline void	loopword(unsigned char **restrict cs1,
-						unsigned char **restrict cs2,
-						size_t *restrict n)
+static inline void	loopword(unsigned char **cs1,
+						unsigned char **cs2,
+						size_t *n)
 {
 	uint64_t	*lls1;
 	uint64_t	*lls2;
@@ -54,7 +54,7 @@ static inline void	loopword(unsigned char **restrict cs1,
 	*cs2 = (unsigned char *)lls2;
 }
 
-void				*ft_memcpy(void *restrict s1, const void *restrict s2,
+void				*ft_memcpy(void *s1, const void *s2,
 						size_t n)
 {
 	unsigned char	*cs1;

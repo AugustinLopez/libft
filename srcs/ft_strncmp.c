@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:44:16 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/02 16:37:14 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 12:25:02 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 */
 
 static inline int	align_address(const unsigned char **c1,
-						const unsigned char **c2, size_t *restrict n)
+						const unsigned char **c2, size_t *n)
 {
 	while ((uintptr_t)*c1 & 0x7)
 	{
@@ -46,7 +46,7 @@ static inline int	align_address(const unsigned char **c1,
 }
 
 static inline void	loopword(const unsigned char **c1,
-						const unsigned char **c2, size_t *restrict n)
+						const unsigned char **c2, size_t *n)
 {
 	const uint64_t	*ll1;
 	const uint64_t	*ll2;

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 11:33:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:23:01 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 12:21:47 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 */
 
 static inline void	longword(unsigned char **cs1, const unsigned char **cs2,
-						size_t *restrict n)
+						size_t *n)
 {
 	uint64_t		*lls1;
 	const uint64_t	*lls2;

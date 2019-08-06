@@ -21,14 +21,14 @@ Symbol | Meaning
 :black_circle:      | Bonus Functions.
 
 ### Print/Put Functions
-- :black_large_square::white_circle:	void	ft_putchar(char c);
-- :black_large_square::white_circle:	void	ft_putchar_fd(char c, int fd);
-- :black_large_square::white_circle:	void	ft_putendl(char const \*s);
-- :black_large_square::white_circle:	void	ft_putendl_fd(char const \*s, int fd);
-- :black_large_square::white_circle:	void	ft_putnbr(int n);
-- :black_large_square::white_circle:	void	ft_putnbr_fd(int n, int fd);
-- :black_large_square::white_circle:	void	ft_putstr(char const \*s)
-- :black_large_square::white_circle:	void	ft_putstr_fd(char const \*s, int fd);
+- :black_large_square::white_circle:	[ft_putchar]( https://github.com/AugustinLopez/libft/wiki/putchar )
+- :black_large_square::white_circle:	[ft_putchar_fd]( https://github.com/AugustinLopez/libft/wiki/putchar )
+- :black_large_square::white_circle:	[ft_putendl]( https://github.com/AugustinLopez/libft/wiki/putstr )
+- :black_large_square::white_circle:	[ft_putendl_fd]( https://github.com/AugustinLopez/libft/wiki/putstr )
+- :black_large_square::white_circle:	[ft_putnbr]( https://github.com/AugustinLopez/libft/wiki/putnbr )
+- :black_large_square::white_circle:	[ft_putnbr_fd]( https://github.com/AugustinLopez/libft/wiki/putnbr )
+- :black_large_square::white_circle:	[ft_putstr]( https://github.com/AugustinLopez/libft/wiki/putstr )
+- :black_large_square::white_circle:	[ft_putstr_fd]( https://github.com/AugustinLopez/libft/wiki/putstr )
 - :white_large_square::black_circle:	int		ft_printf(const char \*format, ...);
 - :white_large_square::black_circle:	int		ft_dprintf(int fd, const char \*format, ...);
 - :white_large_square::black_circle:	char	\*ft_sprintf(const char \*format, ...);
@@ -74,9 +74,10 @@ Symbol | Meaning
 - :black_large_square::black_circle:	size_t	ft_atozu(const char \*src);
 
 ### String Search Functions
-- :white_large_square::white_circle:	char	\*ft_strchr(const char \*s, int c);
-- :white_large_square::white_circle:	int		ft_strcmp(const char \*s1, const char \*s2);
-- :white_large_square::white_circle:	int		ft_strncmp(const char \*s1, const char \*s2, size_t n);
+- :white_large_square::white_circle:	[ft_strlen]( https://github.com/AugustinLopez/libft/wiki/strlen )
+- :white_large_square::white_circle:	[strchr]( https://github.com/AugustinLopez/libft/wiki/strchr )
+- :white_large_square::white_circle:	[ft_strcmp]( https://github.com/AugustinLopez/libft/wiki/strcmp )
+- :white_large_square::white_circle:	[ft_strncmp]( https://github.com/AugustinLopez/libft/wiki/strncmp )
 - :white_large_square::white_circle:	char	\*ft_strstr(const char \*haystack, const char \*needle);
 - :white_large_square::white_circle:	char	\*ft_strnstr(const char \*haystack, const char \*needle, size_t len);
 - :black_large_square::white_circle:	int		ft_strequ(char const \*s1, char const \*s2);

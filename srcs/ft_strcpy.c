@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:00:28 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:22:20 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 12:22:08 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 */
 
 /*
-**char	*ft_strcpy(char *restrict s1, const char *restrict s2)
+**char	*ft_strcpy(char *s1, const char *s2)
 **{
 **	ft_memccpy(s1, s2, 0, -1);
 **	return (s1);
 **}
 */
 
-static inline int	align_address(char **restrict cs1,
-						const char **restrict cs2)
+static inline int	align_address(char **cs1,
+						const char **cs2)
 {
 	while ((uintptr_t)*cs1 & 0x7)
 	{
@@ -39,7 +39,7 @@ static inline int	align_address(char **restrict cs1,
 	return (0);
 }
 
-static inline void	loopword(char **restrict cs1, const char **restrict cs2)
+static inline void	loopword(char **cs1, const char **cs2)
 {
 	uint64_t	*ll1;
 	uint64_t	*ll2;
@@ -58,7 +58,7 @@ static inline void	loopword(char **restrict cs1, const char **restrict cs2)
 	*cs2 = (char *)ll2;
 }
 
-char				*ft_strcpy(char *restrict s1, const char *restrict s2)
+char				*ft_strcpy(char *s1, const char *s2)
 {
 	char		*cs1;
 	const char	*cs2;

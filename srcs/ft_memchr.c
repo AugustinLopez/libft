@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:08:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/01 19:51:11 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 12:23:51 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 **}
 */
 
-static inline const unsigned char	*loopword(const unsigned char *restrict pc,
+static inline const unsigned char	*loopword(const unsigned char *pc,
 										const unsigned char c,
-										size_t *restrict n)
+										size_t *n)
 {
 	const uint64_t	*pll;
 	uint64_t		c_each_byte;

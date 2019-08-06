@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/08 11:21:00 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 12:23:12 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*ft_strrchr(const char *s, int c)
 }
 
 /*
-**static inline char	*basic_strrchr(const char *restrict s,
-**						char *restrict pc, int c)
+**static inline char	*basic_strrchr(const char *s,
+**						char *pc, int c)
 **{
 **	if (*s == c)
 **		pc = (char *)s;
@@ -42,7 +42,7 @@ char	*ft_strrchr(const char *s, int c)
 **	return (pc);
 **}
 **
-**static inline char *loopword(const char *restrict s, char *restrict pc,
+**static inline char *loopword(const char *s, char *pc,
 **						char c)
 **{
 **	const uint64_t *pll;

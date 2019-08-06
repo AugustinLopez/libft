@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/01 20:39:37 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 12:22:37 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static inline char	*basic_strchr(char *s, char c)
 	return (NULL);
 }
 
-static inline char	*loopword(char *restrict s, char c)
+static inline char	*loopword(char *s, char c)
 {
 	const uint64_t	*pll;
 	uint64_t		c_each_byte;

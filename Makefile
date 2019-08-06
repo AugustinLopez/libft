@@ -6,7 +6,7 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/08/01 20:06:35 by aulopez          ###   ########.fr        #
+#    Updated: 2019/08/02 20:19:56 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,7 +141,7 @@ INCLUDES=$(1ST_HEADER:%=$(PATH_1HDR)%) $(2ND_HEADER:%=$(PATH_2HDR)%)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	-@printf " ==> Creating $(NAME)\n"
+	-@printf " ===> Creating $(NAME)\n"
 	@ar rcs $(NAME) $(OBJ)
 
 $(PATH_OBJ)%.o:$(PATH_LIB)%.c $(INCLUDES)

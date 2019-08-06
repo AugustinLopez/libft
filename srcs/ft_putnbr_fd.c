@@ -3,49 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:22:20 by aulopez           #+#    #+#             */
-/*   Updated: 2019/04/12 13:19:16 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/06 11:04:43 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-static int	puissance10(int pow)
-{
-	int	i;
-
-	i = 1;
-	pow++;
-	while (--pow)
-		i = i * 10;
-	return (i);
-}
-
 void		ft_putnbr_fd(int n, int fd)
 {
-	size_t			len;
-	int				buf;
-	unsigned int	positif;
-	char			c;
+	unsigned int	pow10;
+	unsigned int	log;
+	unsigned int	buf;
 	int				ret;
+	char			c;
 
-	len = 0;
-	buf = n;
-	while ((buf /= 10))
-		++len;
-	if (n < 0)
-		ret = write(fd, "-", 1);
-	positif = n * (1 - 2 * (n < 0));
-	buf = puissance10(len);
-	len++;
-	while (len--)
+	log = 0;
+	pow10 = 1;
+	ret = n;
+	while ((ret /= 10))
+		++log;
+	buf = ++log;
+	while (--buf)
+		pow10 *= 10;
+	buf = n < 0 ? -n : n;
+	ret = n < 0 ? write(fd, "-", 1) : 0;
+	while (log--)
 	{
-		c = positif / buf + '0';
-		ret = write(fd, &c, 1);
-		positif %= buf;
-		buf /= 10;
+		c = buf / pow10 + '0';
+		ret += write(fd, &c, 1);
+		buf %= pow10;
+		pow10 /= 10;
 	}
 	(void)ret;
 }
