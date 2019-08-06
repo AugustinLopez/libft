@@ -75,7 +75,7 @@ Symbol | Meaning
 
 ### String Search Functions
 - :white_large_square::white_circle:	[ft_strlen]( https://github.com/AugustinLopez/libft/wiki/strlen )
-- :white_large_square::white_circle:	[strchr]( https://github.com/AugustinLopez/libft/wiki/strchr )
+- :white_large_square::white_circle:	[ft_strchr]( https://github.com/AugustinLopez/libft/wiki/strchr )
 - :white_large_square::white_circle:	[ft_strcmp]( https://github.com/AugustinLopez/libft/wiki/strcmp )
 - :white_large_square::white_circle:	[ft_strncmp]( https://github.com/AugustinLopez/libft/wiki/strncmp )
 - :white_large_square::white_circle:	char	\*ft_strstr(const char \*haystack, const char \*needle);
