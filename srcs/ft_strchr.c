@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/06 12:22:37 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/29 11:34:55 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 **	return (NULL);
 **}
 */
-
 
 static inline char	*basic_strchr(char *s, char c)
 {

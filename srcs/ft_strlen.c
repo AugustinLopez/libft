@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 10:29:13 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/06 12:13:08 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/08/29 11:35:08 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 size_t					ft_strlen(const char *s)
 {
 	size_t			n;
-	const uint64_t *pll;
+	const uint64_t	*pll;
 
 	n = 0;
 	while ((uintptr_t)s & 0x7)
