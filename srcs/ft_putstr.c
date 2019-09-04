@@ -6,13 +6,14 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:46:54 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 11:58:26 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/09/04 16:45:31 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
-void	ft_putstr(char const *c)
+ssize_t	ft_putstr(char const *c)
 {
-	ft_putstr_fd(c, 1);
+	return (write(1, c, ft_strlen(c)));
 }

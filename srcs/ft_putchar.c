@@ -6,13 +6,14 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:46:54 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 11:58:45 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/09/04 16:40:32 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
-void	ft_putchar(char c)
+ssize_t	ft_putchar(unsigned int c)
 {
-	ft_putchar_fd(c, 1);
+	return (ft_putchar_fd(c, 1));
 }

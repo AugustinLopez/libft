@@ -6,13 +6,13 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:25:56 by aulopez           #+#    #+#             */
-/*   Updated: 2019/07/06 11:58:35 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/09/04 17:28:54 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl(char const *s)
+ssize_t	ft_putendl(char const *s)
 {
-	ft_putendl_fd(s, 1);
+	return (ft_putendl_fd(s, 1));
 }

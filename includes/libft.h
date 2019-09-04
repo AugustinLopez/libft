@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:37:09 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/01 19:47:58 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/09/04 17:28:12 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct		s_list
 
 # define ONE_EACH_BYTE	0x0101010101010101L
 # define REV_EACH_BYTE	0x8080808080808080L
+# define LOG_UINT32_MAX	10
+# define LOG_UINT_MAX	LOG_UINT32_MAX
+# define LOG_UINT64_MAX	20
 
 # define FT_EOC			"\033[0m"
 # define FT_BOLD		"\033[1m"
@@ -100,14 +103,14 @@ void				*ft_memalloc(size_t size);
 ** --- Print/Put Functions -----------------------------------------------------
 */
 
-void				ft_putchar(char c);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putendl(char const *s);
-void				ft_putendl_fd(char const *s, int fd);
-void				ft_putnbr(int n);
-void				ft_putnbr_fd(int n, int fd);
-void				ft_putstr(char const *s);
-void				ft_putstr_fd(char const *s, int fd);
+ssize_t				ft_putchar(unsigned int c);
+ssize_t				ft_putchar_fd(unsigned int c, int fd);
+ssize_t				ft_putendl(char const *s);
+ssize_t				ft_putendl_fd(char const *s, int fd);
+ssize_t				ft_putnbr(int n);
+ssize_t				ft_putnbr_fd(int n, int fd);
+ssize_t				ft_putstr(char const *s);
+ssize_t				ft_putstr_fd(char const *s, int fd);
 int					ft_printf(const char *format, ...);
 int					ft_dprintf(int fd, const char *format, ...);
 char				*ft_sprintf(const char *format, ...);
