@@ -39,5 +39,5 @@ ssize_t		ft_putnbr_fd(int n, int fd)
 		buf %= pow10;
 		pow10 /= 10;
 	}
-	return (write(1, c, iter));
+	return (write(fd, c, iter));
 }
