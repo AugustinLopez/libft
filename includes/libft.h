@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <stdint.h>
+# include <sys/types.h>
 
 typedef struct		s_list
 {

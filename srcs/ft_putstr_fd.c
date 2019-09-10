@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <unistd.h>
+#include <sys/types.h>
 
 ssize_t	ft_putstr_fd(char const *c, int fd)
 {

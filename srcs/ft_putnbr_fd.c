@@ -13,6 +13,7 @@
 #include "libft.h"
 #include <limits.h>
 #include <unistd.h>
+#include <sys/types.h>
 
 ssize_t		ft_putnbr_fd(int n, int fd)
 {

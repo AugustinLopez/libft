@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <sys/types.h>
 
 ssize_t		ft_putnbr(int n)
 {

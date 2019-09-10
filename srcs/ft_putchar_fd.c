@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <sys/types.h>
 
 /*
 ** https://www.utf8-chartable.de/unicode-utf8-table.pl
