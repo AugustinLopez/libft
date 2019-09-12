@@ -15,7 +15,7 @@ COMPILER=gcc
 FLAGS=-Wall -Wextra -Werror -MMD -MP
 CC=gcc $(FLAGS) -c -I$(PATH_1HDR) -I$(PATH_2HDR)
 
-# --- 1.Source/Header ----------------------------------------------------------
+# --- 1.Source ---------------------------------------------------------------
 
 _PUT=	putchar putchar_fd putendl putendl_fd putnbr putnbr_fd putstr putstr_fd
 _MEM=	memdel bzero memset memcpy memccpy memmove memchr memalloc memcmp
@@ -49,7 +49,7 @@ PATH_2HDR=./srcs/includes2/
 # --- 3.Object/Dependencies ---------------------------------------------------
 
 OBJ=$(SRC:%=$(PATH_OBJ)%.o)
-DEPS=$(OBJ:%.o=%.d)
+DEP=$(OBJ:%.o=%.d)
 
 # --- 4.Rules ------------------------------------------------------------------
 
@@ -75,4 +75,4 @@ re: fclean all
 
 .PHONY: all clean fclean re
 
--include $(DEPS)
+-include $(DEP)
