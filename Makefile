@@ -60,7 +60,7 @@ $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
 
 $(PATH_OBJ)%.o:%.c
-	-@printf " >O $(FLAGS) $(@:.obj/%.o=%)\n"
+	-@printf " >O $(FLAGS) $*\n"
 	@$(CC) $< -o $@
 
 clean:
