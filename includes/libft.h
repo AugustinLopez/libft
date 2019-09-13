@@ -33,6 +33,7 @@ typedef struct		s_list
 # define LOG_UINT32_MAX	10
 # define LOG_UINT_MAX	LOG_UINT32_MAX
 # define LOG_UINT64_MAX	20
+# define POW10_LOG_SIZE_MAX 10000000000000000000UL
 
 # define FT_EOC			"\033[0m"
 # define FT_BOLD		"\033[1m"
