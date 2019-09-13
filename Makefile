@@ -42,7 +42,7 @@ SRC=$(_LIBFT:%=ft_%) $(PRINTF) $(_FTOA)
 # --- 2.Path -------------------------------------------------------------------
 
 VPATH=srcs:srcs/printf:srcs/printf/ftoa
-PATH_OBJ=./.obj/
+PATH_OBJ=./.object/
 PATH_1HDR=./includes/
 PATH_2HDR=./srcs/includes2/
 
