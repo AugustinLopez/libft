@@ -19,11 +19,11 @@ size_t	ft_strchri(const char *s, int c)
 	n = 2;
 	if (!c)
 		return (0);
-	if ((char)*s == (char)c)
+	if ((unsigned char)*s == (unsigned char)c)
 		return (1);
 	while (*(s++))
 	{
-		if ((char)*s == (char)c)
+		if ((unsigned char)*s == (unsigned char)c)
 			return (n);
 		n++;
 	}

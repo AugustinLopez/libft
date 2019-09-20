@@ -28,15 +28,15 @@
 
 static inline char	*basic_strchr(char *s, char c)
 {
-	if ((char)*s == c)
+	if ((unsigned char)*s == (unsigned char)c)
 		return (s);
 	while (*(s++))
-		if ((char)*s == c)
+		if ((unsigned char)*s == (unsigned char)c)
 			return (s);
 	return (NULL);
 }
 
-static inline char	*loopword(char *s, char c)
+static inline char	*loopword(char *s, unsigned char c)
 {
 	const uint64_t	*pll;
 	uint64_t		c_each_byte;
@@ -63,12 +63,12 @@ char				*ft_strchr(const char *s, int c)
 {
 	while ((uintptr_t)s & 0x7)
 	{
-		if ((char)*s == (char)c)
+		if ((unsigned char)*s == (unsigned char)c)
 			return ((char *)s);
 		if (!*s++)
 			return (NULL);
 	}
-	if (!(s = (const char *)loopword((char *)s, (char)c)))
+	if (!(s = (const char *)loopword((char *)s, (unsigned char)c)))
 		return (NULL);
-	return (basic_strchr((char *)s, (char)c));
+	return (basic_strchr((char *)s, (unsigned char)c));
 }

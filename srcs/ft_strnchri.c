@@ -17,11 +17,11 @@ size_t	ft_strnchri(const char *s, int c, size_t n)
 	size_t	size;
 
 	size = 2;
-	if ((char)*s == (char)c)
+	if ((unsigned char)*s == (unsigned char)c)
 		return (1);
 	while (*(s++) && n--)
 	{
-		if ((char)*s == (char)c)
+		if ((unsigned char)*s == (unsigned char)c)
 			return (size);
 		size++;
 	}
