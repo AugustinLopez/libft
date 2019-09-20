@@ -28,10 +28,10 @@
 
 static inline char	*basic_strchr(char *s, char c)
 {
-	if (*s == c)
+	if ((char)*s == c)
 		return (s);
 	while (*(s++))
-		if (*s == c)
+		if ((char)*s == c)
 			return (s);
 	return (NULL);
 }
@@ -63,7 +63,7 @@ char				*ft_strchr(const char *s, int c)
 {
 	while ((uintptr_t)s & 0x7)
 	{
-		if (*s == (char)c)
+		if ((char)*s == (char)c)
 			return ((char *)s);
 		if (!*s++)
 			return (NULL);
