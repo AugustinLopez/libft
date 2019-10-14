@@ -6,9 +6,11 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 01:22:00 by aulopez           #+#    #+#             */
-/*   Updated: 2019/10/14 17:27:32 by aulopez          ###   ########.fr       */
+/*   Updated: 2019/10/14 17:39:58 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <string.h>
 
 char	*ft_strchr(const char *s, int c)
 {
