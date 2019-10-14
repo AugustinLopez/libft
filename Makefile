@@ -6,13 +6,13 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2019/08/02 20:19:56 by aulopez          ###   ########.fr        #
+#    Updated: 2019/10/14 17:36:37 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
 COMPILER=gcc
-FLAGS=-Wall -Wextra -Werror -MMD -MP
+FLAGS=-g3 -Wall -Wextra -Werror -MMD -MP
 CC=gcc $(FLAGS) -c -I$(PATH_1HDR) -I$(PATH_2HDR)
 
 # --- 1.Source ---------------------------------------------------------------
